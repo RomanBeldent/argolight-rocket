@@ -1,7 +1,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const { success } = require('./helper')
-let rockets = require('./mock-rocket')
+let rockets = require('./db/mock-rocket')
 
 const app = express()
 const port = 3000
