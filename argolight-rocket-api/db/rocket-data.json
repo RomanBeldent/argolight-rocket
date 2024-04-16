@@ -1,7 +1,7 @@
 [
     {
         "name": "Falcon 9",
-        "height": 70,
+        "height": "70m",
         "active": true,
         "description": "Falcon 9 is a reusable, two-stage rocket designed and manufactured by SpaceX for the reliable and safe transport of people and payloads into Earth orbit and beyond. Falcon 9 is the world’s first orbital class reusable rocket. Reusability allows SpaceX to refly the most expensive parts of the rocket, which in turn drives down the cost of space access.",
         "country": "United States",
@@ -25,7 +25,7 @@
     },
     {
         "name": "Dragon",
-        "height": 8.1,
+        "height": "8.10m",
         "active": false,
         "description": "The Dragon spacecraft is capable of carrying up to 7 passengers to and from Earth orbit, and beyond. It is the only spacecraft currently flying that is capable of returning significant amounts of cargo to Earth, and is the first private spacecraft to take humans to the space station.",
         "country": "United States",
