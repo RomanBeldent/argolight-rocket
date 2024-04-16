@@ -1,9 +1,12 @@
 const express = require('express')
+const morgan = require('morgan')
 const { success } = require('./helper')
 let rockets = require('./mock-rocket')
 
 const app = express()
 const port = 3000
+
+app.use(morgan('dev'))
 
 app.get('/', (req, res) => res.send('Hello, Express !'))
 
@@ -15,7 +18,8 @@ app.get('/api/rockets/:id', (req, res) => {
 })
 
 app.get('/api/rockets', (req, res) => {
-    res.json(`Il y a un total de ${rockets.length} fusées dans l'API pour l'instant`)
+    const message = 'Voici la liste de toutes les fusées'
+    res.json(success(message, rockets))
 })
 
 app.listen(port, () => console.log(`Notre app node est démarré sur le port : http://localhost:${port}`))
