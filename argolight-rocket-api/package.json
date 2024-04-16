@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/RomanBeldent/argolight-rocket/issues"
   },
-  "homepage": "https://github.com/RomanBeldent/argolight-rocket#readme"
+  "homepage": "https://github.com/RomanBeldent/argolight-rocket#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
 }
