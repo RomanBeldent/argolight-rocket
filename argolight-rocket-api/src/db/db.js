@@ -1,10 +1,11 @@
 const { MongoClient } = require('mongodb')
 
 let dbConnection
+let uri = 'mongodb+srv://argolight:argolight@cluster0.wdcbpqg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 
 module.exports = {
     connectToDb: (cb) => {
-        MongoClient.connect('mongodb://localhost:27017/spacex')
+        MongoClient.connect(uri)
         .then((client) => {
             dbConnection = client.db()
             return cb()

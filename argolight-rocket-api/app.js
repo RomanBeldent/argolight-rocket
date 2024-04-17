@@ -8,7 +8,9 @@ const { ObjectId } = require('mongodb')
 const app = express()
 const port = 3000
 
-app.use(morgan('dev'))
+app
+    .use(morgan('dev'))
+    .use(express.json())
 
 // db connection
 let db
@@ -26,7 +28,6 @@ connectToDb((err) => {
 app.get('/', (req, res) => res.send('Hello, Express !'))
 
 app.get('/api/rockets', (req, res) => {
-    const message = 'This is the list of all rockets'
     let rockets = []
 
     db.collection('rockets')
@@ -34,6 +35,7 @@ app.get('/api/rockets', (req, res) => {
         // .sort()
         .forEach(rocket => rockets.push(rocket))
         .then(() => {
+            const message = `There is currently ${rockets.length} rockets in the list`
             res.status(200).json(success(message, rockets))
         })
         .catch(() => {
@@ -60,6 +62,19 @@ app.get('/api/rockets/:id', (req, res) => {
     } else {
         res.status(500).json({ error: 'Not a valid document ID' })
     }
+})
+
+app.post('/api/rockets', (req, res) => {
+    const rocket = req.body
+
+    db.collection('rockets')
+        .insertOne(rocket)
+        .then(result => {
+            res.status(201).json(result)
+        })
+        .catch(err => {
+            res.status(500).json({ err: 'Could not create a new rocket' })
+        })
 })
 
 // 404 route error handling
