@@ -1,8 +1,5 @@
 [
   {
-    "_id": {
-      "$oid": "661f853a1efe1ae4fa7998b3"
-    },
     "name": "Falcon 9",
     "height": 70,
     "active": true,
@@ -11,9 +8,6 @@
     "pictureUrl": "https://www.spacex.com/static/images/falcon-9/refresh/F9_DM2_LAUNCH_3840x2560.jpg"
   },
   {
-    "_id": {
-      "$oid": "661f853a1efe1ae4fa7998b4"
-    },
     "name": "Falcon Heavy",
     "height": 70,
     "active": false,
@@ -22,9 +16,6 @@
     "pictureUrl": "https://www.spacex.com/static/images/falcon-heavy/FH_1.jpg"
   },
   {
-    "_id": {
-      "$oid": "661f853a1efe1ae4fa7998b5"
-    },
     "name": "Starship",
     "height": 121,
     "active": true,
@@ -33,9 +24,6 @@
     "pictureUrl": "https://www.spacex.com/vehicles/starship/assets/images/STARSHIP_CAPABILITIES_MAIN_Desktop_Darkened_v3.jpg"
   },
   {
-    "_id": {
-      "$oid": "661f853a1efe1ae4fa7998b6"
-    },
     "name": "Dragon",
     "height": 8.1,
     "active": false,
