@@ -29,18 +29,41 @@ connectToDb((err) => {
 })
 
 // routes
-app.post('/signup', (req, res) => {
-    const user = req.body
-    const message = `The user ${req.body.name} has been created`
+app.post('/signup', async (req, res) => {
+    const message = 'User created successfully'
+    const data = {
+        name: req.body.name,
+        password: req.body.password
+    }
 
-    db.collection('users')
-        .insertOne(user)
-        .then(user => {
-            res.status(201).json(success(message, user))
-        })
-        .catch(err => {
-            res.status(500).json({ err: 'Could not create a new user' })
-        })
+    const existingUser = await collection.findOne({ name: data.name })
+    if (existingUser) {
+        return res.status(400).send('User already exists. Please choose a different username.')
+    } else {
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(data.password, saltRounds)
+        data.password = hashedPassword
+        const userdata = await collection.insertMany(data)
+        console.log(userdata)
+        res.status(201).json(success(message, data))
+    }
+})
+
+app.post('/signin', async (req, res) => {
+    try {
+        const check = await collection.findOne({ name: req.body.name })
+        if (!check) {
+            return res.status(400).send('Username not found')
+        }
+        const isPasswordMatch = await bcrypt.compare(req.body.password, check.password)
+        if (isPasswordMatch) {
+            return res.status(200).send('Welcome to SpaceX')
+        } else {
+            return res.send('Wrong password')
+        }
+    } catch (error) {
+        return res.status(500).send('Internal server error')
+    }
 })
 
 app.get('/api/rockets', (req, res) => {
