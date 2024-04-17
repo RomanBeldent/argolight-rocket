@@ -14,6 +14,7 @@ const port = 3000
 app
     .use(morgan('dev'))
     .use(express.json())
+    .use(express.urlencoded({ extended: false }))
 
 // db connection
 let db
@@ -28,7 +29,19 @@ connectToDb((err) => {
 })
 
 // routes
-app.get('/', (req, res) => res.send('Hello, Express !'))
+app.post('/signup', (req, res) => {
+    const user = req.body
+    const message = `The user ${req.body.name} has been created`
+
+    db.collection('users')
+        .insertOne(user)
+        .then(user => {
+            res.status(201).json(success(message, user))
+        })
+        .catch(err => {
+            res.status(500).json({ err: 'Could not create a new user' })
+        })
+})
 
 app.get('/api/rockets', (req, res) => {
     let rockets = []
@@ -104,7 +117,7 @@ app.patch('/api/rockets/:id', (req, res) => {
 
     if (ObjectId.isValid(req.params.id)) {
         db.collection('rockets')
-            .updateOne({ _id: new ObjectId(req.params.id)}, {$set: updates})
+            .updateOne({ _id: new ObjectId(req.params.id) }, { $set: updates })
             .then(rocket => {
                 res.status(200).json(success(message, rocket))
             })
