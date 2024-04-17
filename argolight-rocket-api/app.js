@@ -1,5 +1,4 @@
 const express = require('express')
-const pasth = require('path')
 const bcrypt = require('bcrypt')
 const { connectToDb, getDb } = require('./src/db/db')
 const morgan = require('morgan')
