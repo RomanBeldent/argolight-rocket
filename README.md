@@ -14,8 +14,8 @@ SpaceX <a href="https://www.spacex.com/">website</a> to fetch datas & pictures
 ### Youtubers
 Thanks to these fellows for their tutorial that helped me through this whole process 🙏
 
-<a href="https://www.youtube.com/watch?v=ExcRbA7fy_A&list=PL4cUxeGkcC9h77dJ-QJlwGlZlTd4ecZOA&index=1">Net Ninja</a> for his MongoDB tutorial
+<a href="https://www.youtube.com/watch?v=ExcRbA7fy_A&list=PL4cUxeGkcC9h77dJ-QJlwGlZlTd4ecZOA&index=1">Net Ninja</a> for his clear and excellent MongoDB tutorial
 
-<a href="https://www.youtube.com/watch?v=LnRCX074VfA">Justin Brooks<a/> for Vue 3 & Electron setup
+<a href="https://www.youtube.com/watch?v=LnRCX074VfA">Justin Brooks<a/> to setup Electron & vue all together
 
-<a href="https://www.youtube.com/watch?v=NRxzvpdduvQ">Simon Dieney</a>'s beginner friendly tutorial that introduced me to node.js & Express 
+<a href="https://www.youtube.com/watch?v=NRxzvpdduvQ">Simon Dieney</a>'s beginner friendly tutorial that introduced me to node.js & Express
