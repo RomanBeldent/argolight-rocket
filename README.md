@@ -10,7 +10,7 @@ npm update
 npm run start
 ```
 
-You can now access the mongodb atlas datababase
+You can now access the mongodb atlas datababase and test the different routes
 
 ## Documentation & Credits
 ### Documentation
