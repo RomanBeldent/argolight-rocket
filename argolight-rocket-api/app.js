@@ -1,8 +1,11 @@
 const express = require('express')
+const pasth = require('path')
+const bcrypt = require('bcrypt')
 const { connectToDb, getDb } = require('./src/db/db')
 const morgan = require('morgan')
 const { success } = require('./src/helper/success')
 const { ObjectId } = require('mongodb')
+const collection = require('./src/db/auth')
 
 // init app & middleware
 const app = express()
