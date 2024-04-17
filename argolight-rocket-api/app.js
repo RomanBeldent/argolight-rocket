@@ -1,7 +1,7 @@
 const express = require('express')
 const { connectToDb, getDb } = require('./db/db')
 const morgan = require('morgan')
-let rockets = require('./db/mock-rocket')
+const { ObjectId } = require('mongodb')
 const { success } = require('./helper')
 
 // init app & middleware
@@ -25,14 +25,28 @@ connectToDb((err) => {
 // routes
 app.get('/', (req, res) => res.send('Hello, Express !'))
 
-app.get('/api/rockets/:id', (req, res) => {
-    const id = parseInt(req.params.id)
-    const rocket = rockets.find(rocket => rocket.id === id)
-    const message = 'Une fusée a été trouvé.'
-    res.json(success(message, rocket))
+app.get('/api/rockets', (req, res) => {
+    const message = 'This is the list of all rockets'
+    let rockets = []
+
+    db.collection('rockets')
+        .find()
+        // .sort()
+        .forEach(rocket => rockets.push(rocket))
+        .then(() => {
+            res.status(200).json(success(message, rockets))
+        })
+        .catch(() => {
+            res.status(500).json({ error: 'Could not fetch the documents' })
+        })
 })
 
-app.get('/api/rockets', (req, res) => {
-    const message = 'Voici la liste de toutes les fusées'
-    res.json(success(message, rockets))
+app.get('/api/rockets/:id', (req, res) => {
+    const id = parseInt(req.params.id)
+    const rocket = rockets.find(rocket => rocket._id === id)
+    const message = 'A rocket has been found'
+
+    db.collection('rockets')
+        .findOne({ObjectId})
+    res.json(success(message, rocket))
 })
