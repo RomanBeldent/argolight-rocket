@@ -1,8 +1,8 @@
 const express = require('express')
 const { connectToDb, getDb } = require('./db/db')
 const morgan = require('morgan')
-const { ObjectId } = require('mongodb')
 const { success } = require('./helper')
+const { ObjectId } = require('mongodb')
 
 // init app & middleware
 const app = express()
@@ -42,11 +42,15 @@ app.get('/api/rockets', (req, res) => {
 })
 
 app.get('/api/rockets/:id', (req, res) => {
-    const id = parseInt(req.params.id)
-    const rocket = rockets.find(rocket => rocket._id === id)
     const message = 'A rocket has been found'
+    let id = new ObjectId(req.params.id)
 
     db.collection('rockets')
-        .findOne({ObjectId})
-    res.json(success(message, rocket))
+        .findOne({ _id: id })
+        .then((rocket) => {
+            res.status(200).json(success(message, rocket))
+        })
+        .catch(err => {
+            res.status(500).json({error: 'Could not fetch the document'})
+        })
 })
