@@ -1,7 +1,7 @@
 const express = require('express')
 const { connectToDb, getDb } = require('./src/db/db')
 const morgan = require('morgan')
-const { success } = require('./helper')
+const { success } = require('./src/helper/success')
 const { ObjectId } = require('mongodb')
 
 // init app & middleware
