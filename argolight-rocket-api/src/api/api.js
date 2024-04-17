@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const { getDb } = require('./src/db/db')
-const { success } = require('./src/helper/success')
+const { getDb } = require('../db/db')
+const { success } = require('../helper/success')
 const { ObjectId } = require('mongodb')
 
 router.get('/rockets', async (req, res) => {

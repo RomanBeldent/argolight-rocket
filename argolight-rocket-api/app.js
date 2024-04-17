@@ -4,7 +4,7 @@ const { connectToDb, getDb } = require('./src/db/db')
 const morgan = require('morgan')
 const { success } = require('./src/helper/success')
 const collection = require('./src/db/auth')
-const apiRouting = require('./api')
+const apiRouting = require('./src/api/api')
 
 // init app & middleware
 const app = express()
