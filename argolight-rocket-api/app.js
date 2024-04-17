@@ -39,7 +39,7 @@ app.get('/api/rockets', (req, res) => {
             res.status(200).json(success(message, rockets))
         })
         .catch(() => {
-            res.status(500).json({ error: 'Could not fetch the documents' })
+            res.status(500).json({ error: 'Could not fetch the rockets' })
         })
 })
 
