@@ -1,8 +1,11 @@
 const express = require('express')
+const pasth = require('path')
+const bcrypt = require('bcrypt')
 const { connectToDb, getDb } = require('./src/db/db')
 const morgan = require('morgan')
 const { success } = require('./src/helper/success')
 const { ObjectId } = require('mongodb')
+const collection = require('./src/db/auth')
 
 // init app & middleware
 const app = express()
@@ -11,6 +14,7 @@ const port = 3000
 app
     .use(morgan('dev'))
     .use(express.json())
+    .use(express.urlencoded({ extended: false }))
 
 // db connection
 let db
@@ -25,7 +29,42 @@ connectToDb((err) => {
 })
 
 // routes
-app.get('/', (req, res) => res.send('Hello, Express !'))
+app.post('/signup', async (req, res) => {
+    const message = 'User created successfully'
+    const data = {
+        name: req.body.name,
+        password: req.body.password
+    }
+
+    const existingUser = await collection.findOne({ name: data.name })
+    if (existingUser) {
+        return res.status(400).send('User already exists. Please choose a different username.')
+    } else {
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(data.password, saltRounds)
+        data.password = hashedPassword
+        const userdata = await collection.insertMany(data)
+        console.log(userdata)
+        res.status(201).json(success(message, data))
+    }
+})
+
+app.post('/signin', async (req, res) => {
+    try {
+        const check = await collection.findOne({ name: req.body.name })
+        if (!check) {
+            return res.status(400).send('Username not found')
+        }
+        const isPasswordMatch = await bcrypt.compare(req.body.password, check.password)
+        if (isPasswordMatch) {
+            return res.status(200).send('Welcome to SpaceX')
+        } else {
+            return res.send('Wrong password')
+        }
+    } catch (error) {
+        return res.status(500).send('Internal server error')
+    }
+})
 
 app.get('/api/rockets', (req, res) => {
     let rockets = []
@@ -101,7 +140,7 @@ app.patch('/api/rockets/:id', (req, res) => {
 
     if (ObjectId.isValid(req.params.id)) {
         db.collection('rockets')
-            .updateOne({ _id: new ObjectId(req.params.id)}, {$set: updates})
+            .updateOne({ _id: new ObjectId(req.params.id) }, { $set: updates })
             .then(rocket => {
                 res.status(200).json(success(message, rocket))
             })
