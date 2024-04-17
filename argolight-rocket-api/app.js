@@ -1,14 +1,26 @@
 const express = require('express')
+const { connectToDb, getDb } = require('./db/db')
 const morgan = require('morgan')
-const { success } = require('./helper')
 let rockets = require('./db/mock-rocket')
+const { success } = require('./helper')
 
+// init app & middleware
 const app = express()
 const port = 3000
 
 app.use(morgan('dev'))
 
-app.listen(port, () => console.log(`Notre app node est démarré sur le port : http://localhost:${port}`))
+// db connection
+let db
+
+connectToDb((err) => {
+    if (!err) {
+        app.listen(port, () => {
+            console.log(`Notre app node est démarré sur le port : http://localhost:${port}`)
+        })
+        db = getDb()
+    }
+})
 
 // routes
 app.get('/', (req, res) => res.send('Hello, Express !'))
