@@ -1,5 +1,5 @@
 const express = require('express')
-const { connectToDb, getDb } = require('./db/db')
+const { connectToDb, getDb } = require('./src/db/db')
 const morgan = require('morgan')
 const { success } = require('./helper')
 const { ObjectId } = require('mongodb')
@@ -48,12 +48,21 @@ app.get('/api/rockets/:id', (req, res) => {
         db.collection('rockets')
             .findOne({ _id: new ObjectId(req.params.id) })
             .then((rocket) => {
-                res.status(200).json(success(message, rocket))
+                if (!rocket) {
+                    throw new Error('Not Found')
+                } else {
+                    res.status(200).json(success(message, rocket))
+                }
             })
             .catch(err => {
-                res.status(500).json({ error: 'Could not fetch the document' })
+                res.status(500).json({ error: 'The ID you\'re looking for does not match an existing rocket ID' })
             })
     } else {
         res.status(500).json({ error: 'Not a valid document ID' })
     }
+})
+
+// 404 route error handling
+app.get('*', (req, res) => {
+    res.status(404).json({ error: 'This route does not exist in this world, but maybe in another universe !' })
 })

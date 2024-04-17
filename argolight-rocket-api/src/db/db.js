@@ -1,4 +1,4 @@
-const { MongoClient } = require('../src/node_modules/mongodb/mongodb')
+const { MongoClient } = require('mongodb')
 
 let dbConnection
 
