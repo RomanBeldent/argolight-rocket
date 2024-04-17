@@ -2,7 +2,15 @@
 A mini-project realized for Argolight company
 
 ## How to start project
+To start the API, after you cloned the repo, head to argoligh-rocket-api and use these 3 command lines
 
+```cmd
+npm install
+npm update
+npm run start
+```
+
+You can now access the mongodb atlas datababase
 
 ## Documentation & Credits
 ### Documentation
