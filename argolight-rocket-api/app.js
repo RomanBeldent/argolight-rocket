@@ -8,6 +8,9 @@ const port = 3000
 
 app.use(morgan('dev'))
 
+app.listen(port, () => console.log(`Notre app node est démarré sur le port : http://localhost:${port}`))
+
+// routes
 app.get('/', (req, res) => res.send('Hello, Express !'))
 
 app.get('/api/rockets/:id', (req, res) => {
@@ -21,5 +24,3 @@ app.get('/api/rockets', (req, res) => {
     const message = 'Voici la liste de toutes les fusées'
     res.json(success(message, rockets))
 })
-
-app.listen(port, () => console.log(`Notre app node est démarré sur le port : http://localhost:${port}`))
