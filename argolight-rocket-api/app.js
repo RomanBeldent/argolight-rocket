@@ -95,6 +95,24 @@ app.delete('/api/rockets/:id', (req, res) => {
     }
 })
 
+app.patch('/api/rockets/:id', (req, res) => {
+    const updates = req.body
+    const message = `The rocket has been properly updated`
+
+    if (ObjectId.isValid(req.params.id)) {
+        db.collection('rockets')
+            .updateOne({ _id: new ObjectId(req.params.id)}, {$set: updates})
+            .then(rocket => {
+                res.status(200).json(success(message, rocket))
+            })
+            .catch(err => {
+                res.status(500).json({ error: 'Could not update the rocket' })
+            })
+    } else {
+        res.status(500).json({ error: 'Not a valid rocket ID' })
+    }
+})
+
 // 404 route error handling
 app.get('*', (req, res) => {
     res.status(404).json({ error: 'This route does not exist in this world, but maybe in another universe !' })
