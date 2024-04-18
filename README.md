@@ -1,7 +1,15 @@
 # Argolight-rocket
 A mini-project realized for Argolight company
 
+## Prerequisites
+
+Before cloning, ensure you have the following prerequisites met:
+
+Node.js installed on your system
+npm package manager installed
+
 ## How to start project
+
 To start the API, after you cloned the repo, head to argoligh-rocket-api and use these 3 command lines
 
 ```cmd
