@@ -6,6 +6,7 @@ A mini-project realized for Argolight company
 Before cloning, ensure you have the following prerequisites met:
 
 Node.js installed on your system
+
 npm package manager installed
 
 ## How to start project
