@@ -18,5 +18,5 @@ module.exports = {
             return cb(err)
         })
     },
-    getDb: () => dbConnection
+    getDb: async () => await dbConnection
 }
