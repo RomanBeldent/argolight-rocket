@@ -35,4 +35,4 @@ Thanks to these fellows for their tutorial that helped me through this whole pro
 
 <a href="https://www.youtube.com/watch?v=LnRCX074VfA">Justin Brooks<a/> to setup Electron & vue all together
 
-<a href="https://www.youtube.com/watch?v=NRxzvpdduvQ">Simon Dieney</a>'s beginner friendly tutorials that introduced me to node.js / react & Express
+<a href="https://www.youtube.com/watch?v=NRxzvpdduvQ">Simon Dieney</a>'s beginner friendly tutorials that introduced me to node.js, express, react
