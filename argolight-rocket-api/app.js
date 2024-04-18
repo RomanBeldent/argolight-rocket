@@ -28,7 +28,6 @@ connectToDb((err) => {
 })
 
 // routes
-
 app.post('/signup', async (req, res) => {
     const message = 'User created successfully'
     const data = {
@@ -66,6 +65,7 @@ app.post('/signin', async (req, res) => {
     }
 })
 
+//api routes
 app.use('/api', apiRouting)
 // 404 route error handling
 app.get('*', (req, res) => {
