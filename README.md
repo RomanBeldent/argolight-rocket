@@ -9,9 +9,10 @@ Before cloning, ensure you have the following prerequisites met:
 
 - npm package manager installed
 
-## How to start project
+## How to start project 
+### Back-End
 
-To start the API, after you cloned the repo, head to argoligh-rocket-api and use these 3 command lines
+To start the API, head to argoligh-rocket-api folder and use these 3 command lines
 
 ```cmd
 npm install
@@ -20,6 +21,10 @@ npm run start
 ```
 
 You can now access the mongodb atlas datababase and test the different routes
+
+### Front-end
+
+WIP
 
 ## Documentation & Credits
 ### Documentation
