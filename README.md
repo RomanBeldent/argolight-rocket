@@ -22,6 +22,8 @@ npm run start
 
 You can now access the mongodb atlas datababase and test the different routes
 
+Concerning user/signin & user/signup routes in POST methods, you can test them using an API testing tool (like ThuderClient or Insomnia)
+
 ### Front-End
 
 WIP
