@@ -28,7 +28,7 @@ connectToDb((err) => {
 })
 
 // routes
-app.post('/signup', async (req, res) => {
+app.post('/user/signup', async (req, res) => {
     const message = 'User created successfully'
     const data = {
         name: req.body.name,
@@ -48,7 +48,7 @@ app.post('/signup', async (req, res) => {
     }
 })
 
-app.post('/signin', async (req, res) => {
+app.post('/user/signin', async (req, res) => {
     try {
         const check = await collection.findOne({ name: req.body.name })
         if (!check) {
