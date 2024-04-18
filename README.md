@@ -26,7 +26,7 @@ You can now access the mongodb atlas datababase and test the different routes
 
 SpaceX <a href="https://www.spacex.com/">website</a> to fetch datas & pictures
 
-<a href="https://www.electronjs.org/fr/docs/latest/tutorial/tutorial-first-app">Electron</a> & <a href="https://vuejs.org/guide/introduction.html">Vue</a> websites documentation to get a better understanding of how Electron/vue3 works and how to work with it
+<a href="https://www.electronjs.org/fr/docs/latest/tutorial/tutorial-first-app">Electron</a> & <a href="https://vuejs.org/guide/introduction.html">Vue</a> websites documentation to get a better understanding on how Electron/vue3 works and how to work with it
 
 ### Credits
 Thanks to these fellows for their tutorial that helped me through this whole process 🙏
