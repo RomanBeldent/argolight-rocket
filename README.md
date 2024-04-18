@@ -28,7 +28,7 @@ SpaceX <a href="https://www.spacex.com/">website</a> to fetch datas & pictures
 
 <a href="https://www.electronjs.org/fr/docs/latest/tutorial/tutorial-first-app">Electron</a> & <a href="https://vuejs.org/guide/introduction.html">Vue</a> websites documentation to get a better understanding of how Electron/vue3 works and how to work with it
 
-### Youtubers
+### Credits
 Thanks to these fellows for their tutorial that helped me through this whole process 🙏
 
 <a href="https://www.youtube.com/watch?v=ExcRbA7fy_A&list=PL4cUxeGkcC9h77dJ-QJlwGlZlTd4ecZOA&index=1">Net Ninja</a> for his clear and excellent MongoDB tutorial
