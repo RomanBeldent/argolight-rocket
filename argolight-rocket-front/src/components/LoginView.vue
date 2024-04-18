@@ -1,14 +1,14 @@
 <template>
     <form name="login-form">
         <div class="mb-3">
-            <label for="name">Username: </label>
-            <input id="name" type="text" />
+            <label for="username">Username: </label>
+            <input type="text" id="username" v-model="input.username" />
         </div>
         <div class="mb-3">
             <label for="password">Password: </label>
-            <input id="password" type="password" />
+            <input type="password" id="password" v-model="input.password" />
         </div>
-        <button class="btn btn-outline-dark" type="submit">
+        <button class="btn btn-outline-dark" type="submit" v-on:click.prevent = "login()">
             Login
         </button>
     </form>
@@ -20,10 +20,19 @@ export default {
     data() {
         return {
             input: {
-                name: "",
+                username: "",
                 password: ""
             }
         }
-    }
+    },
+    methods: {
+        login() {
+            if (this.input.username != "" || this.input.password != "") {
+                console.log("authenticated")
+            } else {
+                console.log("Username and Password can not be empty")
+            }
+        }
+    },
 }
 </script>
