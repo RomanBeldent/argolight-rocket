@@ -26,7 +26,7 @@ Concerning user/signin & user/signup routes in POST methods, you can test them u
 
 ### Front-End
 
-WIP
+🚧 WIP 🚧
 
 ## Documentation & Credits
 ### Documentation
