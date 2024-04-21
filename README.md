@@ -25,14 +25,17 @@ You can now access the mongodb atlas datababase and test the different routes
 
 User routes
 ```
-/user/signup
-/user/signin
+POST /user/signup
+POST /user/signin
 ```
 
 Rockets routes
 ```
-/rockets
-/rockets/:id
+GET /rockets
+GET /rockets/:id
+POST /rockets
+PATCH /rockets/:id
+DELETE /rockets/:id
 ```
 
 Concerning user/signin & user/signup routes in POST methods, you can test them using an API testing tool (like ThuderClient or Insomnia)
