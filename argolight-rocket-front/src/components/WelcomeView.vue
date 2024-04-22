@@ -16,8 +16,5 @@
       return this.$store.getters[`auth/${GET_USERNAME}`]
     }, 
     }
-   
-  
-  
   }
   </script>
