@@ -1,7 +1,6 @@
 const { MongoClient } = require('mongodb')
 
 let dbConnection
-// Entrez ici le mdp envoyez par mail pour accéder à la DB
 let password = 'mIdV6OTjRlF7Cwct'
 const uri = `mongodb+srv://argolight:${password}@cluster0.wdcbpqg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 
