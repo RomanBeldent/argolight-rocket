@@ -67,7 +67,7 @@ app.post('/user/signin', async (req, res) => {
                 },
             },
                 process.env.ACCESS_TOKEN_SECRET,
-                { expiresIn: "1m" }
+                { expiresIn: "5m" }
             )
             res.status(200).json({ accessToken })
         } else {
