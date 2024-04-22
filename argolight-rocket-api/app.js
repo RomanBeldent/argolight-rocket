@@ -7,6 +7,7 @@ const morgan = require('morgan')
 const { success } = require('./src/helper/success')
 const collection = require('./src/models/userModel')
 const apiRouting = require('./src/api/api')
+const cors = require('cors')
 
 // init app & middleware
 const app = express()
@@ -16,6 +17,7 @@ app
     .use(morgan('dev'))
     .use(express.json())
     .use(express.urlencoded({ extended: false }))
+    .use(cors())
 
 // db connection
 let db
@@ -60,16 +62,16 @@ app.post('/user/signin', async (req, res) => {
             if (!process.env.ACCESS_TOKEN_SECRET) {
                 return res.status(500).send('Access token secret is missing');
             }
-            const accessToken = jwt.sign({
+            const token = jwt.sign({
                 user: {
                     username: user.username,
                     id: user.id
                 },
             },
                 process.env.ACCESS_TOKEN_SECRET,
-                { expiresIn: "5m" }
+                { expiresIn: "30m" }
             )
-            res.status(200).json({ accessToken })
+            res.status(200).json({ token })
         } else {
             res.status(401).send('Password is not valid')
         }
