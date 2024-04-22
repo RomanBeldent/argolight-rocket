@@ -20,14 +20,28 @@ npm update
 npm run start
 ```
 
-#### Routes
-You can now access the mongodb atlas datababase and test the different routes
+### Routes
+#### User routes
 
-User routes
 ```
 POST /user/signup
 POST /user/signin
 ```
+
+In order to test the rockets routes, you first need to get a JWT Token to be authenticated. To do so, use an API testing tool (like ThunderClient or Insomnia), and create yourself a user using `/user/signup` route. 
+
+Then, enter the username & password you just created using `/user/signin` route in JSON format (body section) like so
+
+```json
+{
+  "username": "myUsername",
+  "password": "myPassword"
+}
+```
+
+Once you get the access token in response, use it in Authentication Bearer section to access others routes (the token will be available for 5 minutes, when it expires, repeat the sign in process above to get another one).
+
+You can now access the mongodb atlas datababase and test the different routes !
 
 Rockets routes
 ```
@@ -38,7 +52,6 @@ PATCH /rockets/:id
 DELETE /rockets/:id
 ```
 
-Concerning user/signin & user/signup routes in POST methods, you can test them using an API testing tool (like ThuderClient or Insomnia)
 
 ### Front-End
 
