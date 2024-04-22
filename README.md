@@ -39,7 +39,7 @@ Then, enter the username & password you just created using `/user/signin` route 
 }
 ```
 
-Once you get the access token in response, use it in Authentication Bearer section to access others routes (the token will be available for 5 minutes, when it expires, repeat the sign in process above to get another one).
+Once you get the access token in response, use it in Authentication Bearer section to access others routes (the token will expire in 30 minutes, when it does, repeat the sign in process above to get another one).
 
 You can now access the mongodb atlas datababase and test the different routes !
 
