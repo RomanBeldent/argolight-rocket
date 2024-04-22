@@ -1,5 +1,6 @@
 const express = require('express')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const { connectToDb, getDb } = require('./src/db/db')
 const morgan = require('morgan')
 const { success } = require('./src/helper/success')
@@ -49,17 +50,30 @@ app.post('/user/signup', async (req, res) => {
 
 app.post('/user/signin', async (req, res) => {
     try {
-        const check = await collection.findOne({ username: req.body.username })
-        if (!check) {
+        const user = await collection.findOne({ username: req.body.username })
+        if (!user) {
             return res.status(400).send('Username not found')
         }
-        const isPasswordMatch = await bcrypt.compare(req.body.password, check.password)
+        const isPasswordMatch = await bcrypt.compare(req.body.password, user.password)
         if (isPasswordMatch) {
-            return res.status(200).send('Welcome to SpaceX')
+            if (!process.env.ACCESS_TOKEN_SECRET) {
+                return res.status(500).send('Access token secret is missing');
+            }
+            const accessToken = jwt.sign({
+                user: {
+                    username: user.username,
+                    id: user.id
+                },
+            },
+                process.env.ACCESS_TOKEN_SECRET,
+                { expiresIn: "1m" }
+            )
+            res.status(200).json({ accessToken })
         } else {
-            return res.send('Wrong password')
+            res.status(401).send('Password is not valid')
         }
     } catch (error) {
+        console.error(error.message)
         return res.status(500).send('Internal server error')
     }
 })
