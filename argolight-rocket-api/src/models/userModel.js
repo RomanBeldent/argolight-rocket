@@ -9,7 +9,7 @@ connect.then(() => {
     })
 
 const LoginSchema = new mongoose.Schema({
-    name: {
+    username: {
         type: String,
         require: true
     },

@@ -3,8 +3,9 @@ const router = express.Router()
 const { getDb } = require('../db/db')
 const { success } = require('../helper/success')
 const { ObjectId } = require('mongodb')
+const validateToken = require('../middleware/validateToken')
 
-router.get('/rockets', async (req, res) => {
+router.get('/rockets', validateToken, async (req, res) => {
     let db = await getDb()
     let rockets = []
 
@@ -13,7 +14,7 @@ router.get('/rockets', async (req, res) => {
         // .sort()
         .forEach(rocket => rockets.push(rocket))
         .then(() => {
-            const message = `There is currently ${rockets.length} rockets in the list`
+            const message = `There are currently ${rockets.length} rockets in the list`
             res.status(200).json(success(message, rockets))
         })
         .catch((err) => {
@@ -21,7 +22,7 @@ router.get('/rockets', async (req, res) => {
         })
 })
 
-router.get('/rockets/:id', async (req, res) => {
+router.get('/rockets/:id', validateToken, async (req, res) => {
     let db = await getDb()
     const message = 'A rocket has been found'
 
@@ -44,7 +45,7 @@ router.get('/rockets/:id', async (req, res) => {
     }
 })
 
-router.post('/rockets', async (req, res) => {
+router.post('/rockets', validateToken, async (req, res) => {
     let db = await getDb()
     const rocket = req.body
     const message = `The rocket ${req.body.name} has been added`
@@ -59,7 +60,7 @@ router.post('/rockets', async (req, res) => {
         })
 })
 
-router.delete('/rockets/:id', async (req, res) => {
+router.delete('/rockets/:id', validateToken, async (req, res) => {
     let db = await getDb()
     const message = `The rocket has been properly deleted`
 
@@ -77,7 +78,7 @@ router.delete('/rockets/:id', async (req, res) => {
     }
 })
 
-router.patch('/rockets/:id', async (req, res) => {
+router.patch('/rockets/:id', validateToken, async (req, res) => {
     let db = await getDb()
     const updates = req.body
     const message = `The rocket has been properly updated`
