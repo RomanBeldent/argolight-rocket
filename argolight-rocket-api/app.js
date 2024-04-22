@@ -66,7 +66,7 @@ app.post('/user/signin', async (req, res) => {
 })
 
 //api routes
-app.use('/api', apiRouting)
+app.use('/', apiRouting)
 // 404 route error handling
 app.get('*', (req, res) => {
     res.status(404).json({ error: 'This route does not exist in this world, but maybe in another universe !' })
