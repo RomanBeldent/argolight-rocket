@@ -8,7 +8,7 @@ const cors = require('cors')
 
 // init app & middleware
 const app = express()
-const port = 3000
+const port = process.env.PORT
 
 app
     .use(morgan('dev'))
@@ -28,10 +28,9 @@ connectToDb((err) => {
     }
 })
 
-//api routes
+// routes
 app.use('/', apiRouting)
 app.use('/user', userRouting)
-// 404 route error handling
 app.get('*', (req, res) => {
     res.status(404).json({ error: 'This route does not exist in this world, but maybe in another universe !' })
 })
