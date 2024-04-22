@@ -13,7 +13,7 @@
     methods: {
       logout() {
         localStorage.removeItem('token')
-        this.$router.push({ name: 'LoginView' })
+        this.$router.push({ name: 'Login' })
       }
     }
   };

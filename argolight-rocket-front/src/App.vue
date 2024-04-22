@@ -1,5 +1,5 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
+  <h1>Welcome to SpaceX Program, sign up or login to see rockets</h1>
   <RouterView />
 </template>
 

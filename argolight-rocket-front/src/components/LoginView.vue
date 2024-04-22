@@ -3,6 +3,7 @@
     <input v-model="username" placeholder="Nom d'utilisateur" />
     <input v-model="password" type="password" placeholder="Mot de passe" />
     <button @click="handleLogin">Se connecter</button>
+    <router-link to="/signup">Se créer un compte</router-link>
   </div>
 </template>
 
@@ -28,12 +29,16 @@ export default {
             username: username.value,
             password: password.value
           })
-        });
+        })
+
+        if (!response.ok) {
+          throw new Error(`HTTP Error: ${response.status}`);
+        }
 
         const data = await response.json();
 
         localStorage.setItem('token', data.token);
-        router.push({ name: 'RocketsView' });
+        router.push({ name: 'Rockets' });
         console.log('Connecté avec succès', data);
       } catch (error) {
         console.error('Erreur de connexion', error);
