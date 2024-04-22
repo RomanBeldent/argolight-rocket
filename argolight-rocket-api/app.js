@@ -31,11 +31,11 @@ connectToDb((err) => {
 app.post('/user/signup', async (req, res) => {
     const message = 'User created successfully'
     const data = {
-        name: req.body.name,
+        username: req.body.username,
         password: req.body.password
     }
 
-    const existingUser = await collection.findOne({ name: data.name })
+    const existingUser = await collection.findOne({ username: data.username })
     if (existingUser) {
         return res.status(400).send('User already exists. Please choose a different username.')
     } else {
@@ -50,7 +50,7 @@ app.post('/user/signup', async (req, res) => {
 
 app.post('/user/signin', async (req, res) => {
     try {
-        const check = await collection.findOne({ name: req.body.name })
+        const check = await collection.findOne({ username: req.body.username })
         if (!check) {
             return res.status(400).send('Username not found')
         }
