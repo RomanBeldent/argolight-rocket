@@ -13,7 +13,7 @@ router.get('/rockets', async (req, res) => {
         // .sort()
         .forEach(rocket => rockets.push(rocket))
         .then(() => {
-            const message = `There is currently ${rockets.length} rockets in the list`
+            const message = `There are currently ${rockets.length} rockets in the list`
             res.status(200).json(success(message, rockets))
         })
         .catch((err) => {
