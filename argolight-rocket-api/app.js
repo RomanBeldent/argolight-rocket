@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 const { connectToDb, getDb } = require('./src/db/db')
 const morgan = require('morgan')
 const { success } = require('./src/helper/success')
-const collection = require('./src/db/auth')
+const collection = require('./src/models/userModel')
 const apiRouting = require('./src/api/api')
 
 // init app & middleware
@@ -39,8 +39,7 @@ app.post('/user/signup', async (req, res) => {
     if (existingUser) {
         return res.status(400).send('User already exists. Please choose a different username.')
     } else {
-        const saltRounds = 10;
-        const hashedPassword = await bcrypt.hash(data.password, saltRounds)
+        const hashedPassword = await bcrypt.hash(data.password, 10)
         data.password = hashedPassword
         const userdata = await collection.insertMany(data)
         console.log(userdata)
