@@ -1,47 +1,44 @@
 <template>
-    <form name="login-form">
-        <div class="mb-3">
-            <label for="username">Username: </label>
-            <input type="text" id="username" v-model="input.username" />
-        </div>
-        <div class="mb-3">
-            <label for="password">Password: </label>
-            <input type="password" id="password" v-model="input.password" />
-        </div>
-        <button class="btn btn-outline-dark" type="submit" v-on:click.prevent="login()">
-            Login
-        </button>
-    </form>
-    <h3>Output: {{ this.output }}</h3>
-
-</template>
-
-<script>
-import { SET_AUTHENTICATION, SET_USERNAME } from "../store/storeconstants";
-export default {
-    name: 'LoginView',
+    <div>
+      <input v-model="username" placeholder="Nom d'utilisateur" />
+      <input v-model="password" type="password" placeholder="Mot de passe" />
+      <button @click="handleLogin">Se connecter</button>
+    </div>
+  </template>
+  
+  <script>
+  export default {
     data() {
-        return {
-            input: {
-                username: "",
-                password: ""
-            },
-            output: "",
-        }
+      return {
+        username: '',
+        password: ''
+      };
     },
     methods: {
-        login() {
-            if (this.input.username != "" && this.input.password != "") {
-                this.output = "Authentication complete"
-                this.$store.commit(`auth/${SET_AUTHENTICATION}`, true);
-                this.$store.commit(`auth/${SET_USERNAME}`, this.input.username);
-                this.output = "Authentication complete."
-                this.$router.push('/home')
-            } else {
-                this.$store.commit(`auth/${SET_AUTHENTICATION}`, false);
-                this.output = "Username and password can not be empty"
-            }
-        },
-    },
-}
-</script>
+      async handleLogin() {
+        try {
+          const response = await fetch('http://localhost:3000/user/signin', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              username: this.username,
+              password: this.password
+            })
+          });
+  
+          const data = await response.json();
+          
+          // Stocker le token JWT dans le local storage ou une autre méthode de stockage
+          localStorage.setItem('token', data.token);
+  
+          // Rediriger ou afficher un message de succès
+          console.log('Connecté avec succès', data);
+        } catch (error) {
+          console.error('Erreur de connexion', error);
+        }
+      }
+    }
+  };
+  </script>
