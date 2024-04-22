@@ -1,38 +1,55 @@
 <template>
-    <form name="login-form">
-        <div class="mb-3">
-            <label for="username">Username: </label>
-            <input type="text" id="username" v-model="input.username" />
-        </div>
-        <div class="mb-3">
-            <label for="password">Password: </label>
-            <input type="password" id="password" v-model="input.password" />
-        </div>
-        <button class="btn btn-outline-dark" type="submit" v-on:click.prevent = "login()">
-            Login
-        </button>
-    </form>
+  <div>
+    <input v-model="username" placeholder="Nom d'utilisateur" />
+    <input v-model="password" type="password" placeholder="Mot de passe" />
+    <button @click="handleLogin">Se connecter</button>
+    <router-link to="/signup">Se créer un compte</router-link>
+  </div>
 </template>
 
 <script>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
 export default {
-    name: 'LoginView',
-    data() {
-        return {
-            input: {
-                username: "",
-                password: ""
-            }
+  setup() {
+    const username = ref('');
+    const password = ref('');
+
+    const router = useRouter();
+
+    const handleLogin = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/user/signin', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: username.value,
+            password: password.value
+          })
+        })
+
+        if (!response.ok) {
+          throw new Error(`HTTP Error: ${response.status}`);
         }
-    },
-    methods: {
-        login() {
-            if (this.input.username != "" || this.input.password != "") {
-                console.log("authenticated")
-            } else {
-                console.log("Username and Password can not be empty")
-            }
-        }
-    },
-}
+
+        const data = await response.json();
+
+        localStorage.setItem('token', data.token);
+        router.push({ name: 'Rockets' });
+        console.log('Successfully connected', data);
+      } catch (error) {
+        console.error('Connection error', error);
+      }
+    };
+
+    return {
+      username,
+      password,
+      handleLogin
+    };
+  }
+};
 </script>
