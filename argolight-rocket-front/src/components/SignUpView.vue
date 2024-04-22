@@ -42,13 +42,13 @@
   
           const data = await response.json();
           if (data.message === 'User created successfully') {
-            console.log('Compte créé avec succès', data);
+            console.log('Success !', data);
             router.push({ name: 'Login' });
           } else {
-            console.error('Erreur lors de la création du compte', data.message);
+            console.error('Error during account creation', data.message);
           }
         } catch (error) {
-          console.error('Erreur lors de la création du compte', error);
+          console.error('Error during account creation', error);
         }
       };
   

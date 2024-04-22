@@ -39,9 +39,9 @@ export default {
 
         localStorage.setItem('token', data.token);
         router.push({ name: 'Rockets' });
-        console.log('Connecté avec succès', data);
+        console.log('Successfully connected', data);
       } catch (error) {
-        console.error('Erreur de connexion', error);
+        console.error('Connection error', error);
       }
     };
 
