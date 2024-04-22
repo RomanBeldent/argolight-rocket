@@ -12,11 +12,8 @@
   export default {
     methods: {
       logout() {
-        // Supprimez le token JWT du local storage ou d'un autre système de stockage
-        localStorage.removeItem('token');
-        
-        // Redirigez vers la page de connexion ou une autre page appropriée
-        this.$router.push({ name: 'Login' }); // Assurez-vous d'avoir une route avec name="Login"
+        localStorage.removeItem('token')
+        this.$router.push({ name: 'LoginView' })
       }
     }
   };
