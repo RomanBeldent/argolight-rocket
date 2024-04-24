@@ -1,8 +1,5 @@
 <template>
   <div>
-    <h2>Liste des fusées</h2>
-    <router-link to="/">Retour</router-link>
-    <button @click="logout">Se déconnecter</button>
     <ul>
       <li v-for="rocket in rockets" :key="rocket._id">
         <h3>{{ rocket.name }}</h3>
@@ -55,5 +52,5 @@ export default {
 </script>
 
 <style scoped>
-/* Styles spécifiques à ce composant */
+
 </style>

@@ -1,5 +1,6 @@
-<template>
-  <h1>Welcome to SpaceX Program, sign up or login to see rockets</h1>
+<template>  
+  <button @click="logout" class="btn logout">Se déconnecter</button>
+  <h1>Argolight Rocket Project x SpaceX </h1>
   <RouterView />
 </template>
 
@@ -12,5 +13,10 @@ export default {
 </script>
 
 <style>
-
+#app {
+  width:70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 </style>
