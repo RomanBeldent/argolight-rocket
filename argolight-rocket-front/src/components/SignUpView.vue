@@ -15,6 +15,7 @@
         </div>
       </form>
     </div>
+    <router-link to="/">Retour</router-link>
   </template>
   
   <script>
