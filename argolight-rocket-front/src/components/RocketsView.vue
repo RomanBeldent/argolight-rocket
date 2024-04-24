@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="rockets-list">
     <ul>
       <li v-for="rocket in rockets" :key="rocket._id">
         <h3>{{ rocket.name }}</h3>
@@ -52,5 +52,7 @@ export default {
 </script>
 
 <style scoped>
-
+.rockets-list {
+  width: 70%;
+}
 </style>
