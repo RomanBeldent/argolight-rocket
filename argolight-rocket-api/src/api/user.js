@@ -1,9 +1,9 @@
-const express = require('express')
+import express  from 'express'
 const router = express.Router()
-const { success } = require('../helper/success')
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const collection = require('../models/userModel')
+import success from '../helper/success.js'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import collection from '../models/userModel.js'
 
 router.post('/signup', async (req, res) => {
     const message = 'User created successfully'
@@ -54,4 +54,4 @@ router.post('/signin', async (req, res) => {
     }
 })
 
-module.exports = router
+export default router

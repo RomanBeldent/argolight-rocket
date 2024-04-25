@@ -1,12 +1,13 @@
-const express = require('express')
-require('dotenv').config()
-const { connectToDb, getDb } = require('./src/db/db')
-const morgan = require('morgan')
-const apiRouting = require('./src/api/api')
-const userRouting = require('./src/api/user')
-const cors = require('cors')
+import express  from 'express'
+import dotenv from 'dotenv';
+import { connectToDb, getDb } from './src/db/db.js'
+import morgan  from 'morgan'
+import apiRouting  from './src/api/api.js'
+import userRouting  from './src/api/user.js'
+import cors  from 'cors'
 
 // init app & middleware
+dotenv.config();
 const app = express()
 const port = process.env.PORT
 
@@ -35,4 +36,4 @@ app.get('*', (req, res) => {
     res.status(404).json({ error: 'This route does not exist in this world, but maybe in another universe !' })
 })
 
-module.exports = app
+export default app;
