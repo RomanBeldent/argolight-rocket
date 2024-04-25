@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { ref, onMounted, useRouter } from 'vue';
+import { ref, onMounted } from 'vue';
 
 export default {
   methods: {
@@ -21,11 +21,6 @@ export default {
   },
   setup() {
     const rockets = ref([]);
-    const router = useRouter();
-
-    const togglePanel = (rocketId) => {
-      router.push({ name: 'RocketDetail', params: { id: rocketId }})
-    }
 
     onMounted(async () => {
       try {
@@ -49,8 +44,7 @@ export default {
     });
 
     return {
-      rockets,
-      togglePanel
+      rockets
     };
   }
 };
