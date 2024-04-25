@@ -1,7 +1,7 @@
 <template>
   <div class="rockets-list">
     <div class="rocket-banner" v-for="rocket in rockets" :key="rocket._id">
-      <img :src="rocket.pictureUrl" alt="rocket background">
+      <img :src="rocket.pictureUrl" alt="rocket image">
       <div class="rocket-name">
         {{ rocket.name }}
       </div>
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, useRouter } from 'vue';
 
 export default {
   methods: {
@@ -21,6 +21,11 @@ export default {
   },
   setup() {
     const rockets = ref([]);
+    const router = useRouter();
+
+    const togglePanel = (rocketId) => {
+      router.push({ name: 'RocketDetail', params: { id: rocketId }})
+    }
 
     onMounted(async () => {
       try {
@@ -44,7 +49,8 @@ export default {
     });
 
     return {
-      rockets
+      rockets,
+      togglePanel
     };
   }
 };
@@ -65,24 +71,20 @@ export default {
   border-radius: 10px;
 }
 
-.rocket-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
-
 .rocket-name {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  font-size: 24px;
+  font-size: 36px;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>
