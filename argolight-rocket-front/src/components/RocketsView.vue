@@ -1,6 +1,6 @@
 <template>
   <div class="rockets-list">
-    <div class="rocket-banner" v-for="rocket in rockets" :key="rocket._id">
+    <div class="rocket-banner" v-for="rocket in rockets" :key="rocket._id" @click="handleRocketClick(rocket._id)">
       <img :src="rocket.pictureUrl" alt="rocket image">
       <div class="rocket-name">
         {{ rocket.name }}
@@ -17,6 +17,14 @@ export default {
     logout() {
       localStorage.removeItem('token');
       this.$router.push({ name: 'Login' });
+    },
+    handleRocketClick(rocketId) {
+      const clickedRocket = this.rockets && this.rockets.find(rocket => rocket._id === rocketId);
+      if (clickedRocket) {
+        this.$router.push({ name: 'RocketDetail', params: { id: rocketId } });
+      } else {
+        console.warn(`Fusée avec l'ID ${rocketId} non trouvée`);
+      }
     }
   },
   setup() {
