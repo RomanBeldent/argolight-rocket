@@ -1,9 +1,9 @@
-const express = require('express')
+import express  from 'express'
 const router = express.Router()
-const { getDb } = require('../db/db')
-const { success } = require('../helper/success')
-const { ObjectId } = require('mongodb')
-const validateToken = require('../middleware/validateToken')
+import { getDb } from '../db/db.js';
+import success from '../helper/success.js'
+import ObjectId from 'mongodb'
+import validateToken from '../middleware/validateToken.js'
 
 router.get('/rockets', validateToken, async (req, res) => {
     let db = await getDb()
@@ -113,4 +113,4 @@ router.patch('/rockets/:id', validateToken, async (req, res) => {
     }
 })
 
-module.exports = router
+export default router
