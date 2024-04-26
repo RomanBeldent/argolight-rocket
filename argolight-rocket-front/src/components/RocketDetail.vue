@@ -1,24 +1,24 @@
 <template>
   <section v-if="rocket">
-    <div class="rocket-detail">
+    <div class="rocket-extended">
       <h3>{{ rocket.name }}</h3>
-      <p class="description">{{ rocket.description }}</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Height</th>
-            <th>Country</th>
-            <th>Active</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{ rocket.height }}</td>
-            <td>{{ rocket.country }}</td>
-            <td>{{ rocket.active }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="description-container">
+        <p class="description">{{ rocket.description }}</p>
+        <div class="rocket-data">
+          <div class="rocket-data-info">
+            <div class="label">Height</div>
+            <div class="value">{{ rocket.height }}</div>
+          </div>
+          <div class="rocket-data-info">
+            <div class="label">Country</div>
+            <div class="value">{{ rocket.country }}</div>
+          </div>
+          <div class="rocket-data-info">
+            <div class="label">Active</div>
+            <div class="value">{{ rocket.active }}</div>
+          </div>
+        </div>
+      </div>
     </div>
     <img :src="rocket.pictureUrl" alt="rocket image larger">
   </section>
@@ -62,25 +62,57 @@ section {
   border-radius: 15px;
   display: flex;
   margin: 25px 0 50px 0;
-  height: 500px;
+  height: 650px;
 }
 
-.rocket-detail {
+.rocket-extended {
   background-color: #504743;
-  border-radius: 15px 0 0 15px;
+  border-radius: 10px 0 0 10px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.rocket-data {
+  width: 45%;
+  padding-left: 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.rocket-data-info {
+  display: flex;
+  flex: 1;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  justify-content: space-between;
+  border-bottom: 1px solid white;
+}
+
+.description {
+  width: 50%;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.description-container {
+  display: flex;
+  align-items: center;
+  gap: 5%;
+  padding: 5%;
 }
 
 img {
-  max-width: 35vw;
+  max-width: 32vw;
   width: auto;
   border-radius: 0 15px 15px 0px;
 }
 
 h3 {
-  font-size: 40px;
+  font-size: 50px;
   margin-top: 40px;
   display: flex;
   justify-content: center;
+  font-weight: 600;
 }
 </style>
