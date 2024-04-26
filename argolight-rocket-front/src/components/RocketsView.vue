@@ -8,6 +8,7 @@
     </div>
     <RocketDetail :rocketId="this.displayedRocketId" v-if="isDisplayed" />
   </div>
+  <div class="footer">Argolight Company © Mini-project by Roman Beldent</div>
 </template>
 
 <script>
@@ -70,6 +71,9 @@ export default {
 <style scoped>
 .rockets-list {
   width: 70vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .rocket-banner {
@@ -78,7 +82,7 @@ export default {
   height: 250px;
   overflow: hidden;
   cursor: pointer;
-  margin: 50px;
+  margin: 25px;
   border-radius: 10px;
 }
 
@@ -97,5 +101,9 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.footer {
+  margin: 20px 0 30px 0;
 }
 </style>
