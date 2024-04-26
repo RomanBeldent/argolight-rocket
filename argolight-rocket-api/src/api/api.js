@@ -1,9 +1,9 @@
-const express = require('express')
+import express  from 'express'
 const router = express.Router()
-const { getDb } = require('../db/db')
-const { success } = require('../helper/success')
-const { ObjectId } = require('mongodb')
-const validateToken = require('../middleware/validateToken')
+import { getDb } from '../db/db.js';
+import success from '../helper/success.js'
+import { ObjectId } from 'mongodb'
+import validateToken from '../middleware/validateToken.js'
 
 router.get('/rockets', validateToken, async (req, res) => {
     let db = await getDb()
@@ -49,6 +49,22 @@ router.post('/rockets', validateToken, async (req, res) => {
     let db = await getDb()
     const rocket = req.body
     const message = `The rocket ${req.body.name} has been added`
+
+    const validateRocket = (rocket) => {
+        const requiredFields = ['name', 'height', 'active', 'description', 'country', 'pictureUrl']
+
+        for (const field of requiredFields) {
+           // Ne fonctionne pas avec (!rocket[field]) car false est considéré comme falsy, il considérera donc le champ active comme manquant
+            if (rocket[field] === undefined || rocket[field === null]) {
+                return `Field '${field}' is required`;
+            }
+        }
+    }
+
+    const validationError = validateRocket(rocket);
+    if (validationError) {
+        return res.status(400).json({ error: validationError });
+    }
 
     db.collection('rockets')
         .insertOne(rocket)
@@ -97,4 +113,4 @@ router.patch('/rockets/:id', validateToken, async (req, res) => {
     }
 })
 
-module.exports = router
+export default router

@@ -1,21 +1,18 @@
-const { MongoClient } = require('mongodb')
+import { MongoClient } from 'mongodb';
 
-let dbConnection
-let password = 'mIdV6OTjRlF7Cwct'
-const uri = `mongodb+srv://argolight:${password}@cluster0.wdcbpqg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+let dbConnection;
 
-module.exports = {
-    connectToDb: (cb) => {
-        //mongodb://localhost:27017/spacex
-        MongoClient.connect(uri)
-        .then((client) => {
-            dbConnection = client.db()
-            return cb()
-        })
-        .catch(err => {
-            console.log(err)
-            return cb(err)
-        })
-    },
-    getDb: async () => await dbConnection
-}
+export const connectToDb = async (cb) => {
+    try {
+        const client = await MongoClient.connect(process.env.MONGODB_URI);
+        dbConnection = client.db();
+        cb();
+    } catch (err) {
+        console.log(err);
+        cb(err);
+    }
+};
+
+export const getDb = async () => {
+    return await dbConnection;
+};
