@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
+
 const connect = mongoose.connect('mongodb+srv://argolight:mIdV6OTjRlF7Cwct@cluster0.wdcbpqg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
 
 connect.then(() => {
@@ -21,4 +22,4 @@ const LoginSchema = new mongoose.Schema({
 
 const collection = new mongoose.model('users', LoginSchema)
 
-module.exports = collection
+export default collection
