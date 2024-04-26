@@ -143,7 +143,6 @@ img {
 
 .rocket-banner:hover .chevron-right {
   transform: scale(1.6);
-  filter: drop-shadow(5px 5px 4px rgba(0, 0, 0, 0.5)); 
 }
 
 </style>

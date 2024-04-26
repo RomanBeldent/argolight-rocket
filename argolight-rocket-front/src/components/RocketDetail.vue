@@ -3,7 +3,7 @@
     <div class="rocket-extended">
       <div class="btn-title">
         <button @click="toggleDisplay" class="close-button" type="button">
-          <span>&times;</span>
+          <span class="close-button">&times;</span>
         </button>
         <h3>{{ rocket.name }}</h3>
       </div>
@@ -29,7 +29,6 @@
               <span v-else class="red-dot"></span>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -135,9 +134,10 @@ h3 {
   font-weight: 600;
 }
 
-button {
+.close-button {
   background-color: transparent;
   font-size: 3rem;
+  outline: none;
 }
 
 .green-dot {
