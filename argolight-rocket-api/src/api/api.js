@@ -2,7 +2,7 @@ import express  from 'express'
 const router = express.Router()
 import { getDb } from '../db/db.js';
 import success from '../helper/success.js'
-import ObjectId from 'mongodb'
+import { ObjectId } from 'mongodb'
 import validateToken from '../middleware/validateToken.js'
 
 router.get('/rockets', validateToken, async (req, res) => {
