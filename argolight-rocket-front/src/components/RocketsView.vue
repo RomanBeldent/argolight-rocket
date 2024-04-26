@@ -1,8 +1,13 @@
 <template>
+  <select v-model="filter">
+    <option value="all">All</option>
+    <option value="active">Active</option>
+    <option value="inactive">Inactive</option>
+  </select>
   <div class="rockets-list">
     <RocketDetail :rocketId="this.displayedRocketId" v-if="isDisplayed" @close="toggleDisplay" />
-    <div @click="toggleDisplay(rocket._id)" class="rocket-banner" v-for="rocket in rockets" :key="rocket._id">
-      <img  :src="rocket.pictureUrl" alt="rocket image">
+    <div @click="toggleDisplay(rocket._id)" class="rocket-banner" v-for="rocket in filteredRockets" :key="rocket._id">
+      <img :src="rocket.pictureUrl" alt="rocket image">
       <div class="rocket-name">
         <div class="value">
           <span v-if="rocket.active" class="green dot"></span>
@@ -17,8 +22,11 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import RocketDetail from './RocketDetail.vue'
+
+const filter = ref('all');
+const filteredRockets = ref([]);
 
 export default {
   components: {
@@ -57,15 +65,35 @@ export default {
         }
 
         const dataResponse = await response.json();
-        console.log(dataResponse)
         rockets.value = dataResponse.data
+
+        if (filter.value === 'all') {
+          filteredRockets.value = rockets.value;
+        } else {
+          // Filtrage initial des fusées en fonction du filtre actif/inactif sinon
+          filteredRockets.value = rockets.value.filter(rocket => {
+            return filter.value === 'active' ? rocket.active : !rocket.active;
+          });
+        }
       } catch (error) {
         console.error('Erreur lors de la récupération des fusées', error);
       }
     });
 
+    watch(filter, (newValue) => {
+      if (newValue === 'all') {
+        filteredRockets.value = rockets.value;
+      } else {
+        filteredRockets.value = rockets.value.filter(rocket => {
+          return newValue === 'active' ? rocket.active : !rocket.active;
+        });
+      }
+    });
+
     return {
-      rockets
+      rockets,
+      filter,
+      filteredRockets
     };
   }
 };
@@ -144,5 +172,4 @@ img {
 .rocket-banner:hover .chevron-right {
   transform: scale(1.6);
 }
-
 </style>
