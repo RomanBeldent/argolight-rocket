@@ -1,7 +1,12 @@
 <template>
   <section v-if="rocket">
     <div class="rocket-extended">
-      <h3>{{ rocket.name }}</h3>
+      <div class="btn-title">
+        <button @click="toggleDisplay" class="close-button" type="button">
+          <span>&times;</span>
+        </button>
+        <h3>{{ rocket.name }}</h3>
+      </div>
       <div class="description-container">
         <p class="description">{{ rocket.description }}</p>
         <div class="rocket-data">
@@ -34,6 +39,11 @@ export default {
     return {
       rocket: null
     };
+  },
+  methods: {
+    toggleDisplay() {
+      this.$emit('close')
+    }
   },
   async mounted() {
     try {
@@ -106,6 +116,11 @@ img {
   max-width: 32vw;
   width: auto;
   border-radius: 0 15px 15px 0px;
+}
+
+.btn-title {
+  display: flex;
+  justify-content: center;
 }
 
 h3 {

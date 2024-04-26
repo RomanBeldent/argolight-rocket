@@ -6,7 +6,7 @@
         {{ rocket.name }}
       </div>
     </div>
-    <RocketDetail :rocketId="this.displayedRocketId" v-if="isDisplayed" />
+    <RocketDetail :rocketId="this.displayedRocketId" v-if="isDisplayed" @close="toggleDisplay" />
   </div>
   <div class="footer">Argolight Company © Mini-project by Roman Beldent</div>
 </template>
