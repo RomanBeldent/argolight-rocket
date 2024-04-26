@@ -1,12 +1,17 @@
 <template>
   <div class="rockets-list">
-    <div class="rocket-banner" v-for="rocket in rockets" :key="rocket._id">
-      <img @click="toggleDisplay(rocket._id)" :src="rocket.pictureUrl" alt="rocket image">
+    <RocketDetail :rocketId="this.displayedRocketId" v-if="isDisplayed" @close="toggleDisplay" />
+    <div @click="toggleDisplay(rocket._id)" class="rocket-banner" v-for="rocket in rockets" :key="rocket._id">
+      <img  :src="rocket.pictureUrl" alt="rocket image">
       <div class="rocket-name">
+        <div class="value">
+          <span v-if="rocket.active" class="green dot"></span>
+          <span v-else class="red dot"></span>
+        </div>
         {{ rocket.name }}
+        <span class="chevron-right">&#x3009;</span>
       </div>
     </div>
-    <RocketDetail :rocketId="this.displayedRocketId" v-if="isDisplayed" @close="toggleDisplay" />
   </div>
   <div class="footer">Argolight Company © Mini-project by Roman Beldent</div>
 </template>
@@ -22,15 +27,13 @@ export default {
   data() {
     return {
       isDisplayed: false,
-      displayedRocketId: null
+      displayedRocketId: null,
     }
   },
   methods: {
     toggleDisplay(rocketId) {
       this.isDisplayed = !this.isDisplayed;
       this.displayedRocketId = rocketId;
-      console.log(this.isDisplayed);
-      console.log(rocketId);
     },
     logout() {
       localStorage.removeItem('token');
@@ -87,6 +90,11 @@ export default {
 }
 
 .rocket-name {
+  display: flex;
+  width: 100%;
+  height: 30%;
+  align-items: center;
+  justify-content: space-between;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -106,4 +114,36 @@ img {
 .footer {
   margin: 20px 0 30px 0;
 }
+
+.green.dot {
+  width: 25px;
+  height: 25px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.red.dot {
+  width: 25px;
+  height: 25px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot {
+  margin-left: 30px;
+}
+
+.chevron-right {
+  font-size: 50px;
+  padding-right: 30px;
+  transition: transform 0.5s;
+}
+
+.rocket-banner:hover .chevron-right {
+  transform: scale(1.6);
+  filter: drop-shadow(5px 5px 4px rgba(0, 0, 0, 0.5)); 
+}
+
 </style>

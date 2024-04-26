@@ -12,7 +12,7 @@
         <div class="rocket-data">
           <div class="rocket-data-info">
             <div class="label">Height</div>
-            <div class="value">{{ rocket.height }}</div>
+            <div class="value">{{ rocket.height }}m</div>
           </div>
           <div class="rocket-data-info">
             <div class="label">Country</div>
