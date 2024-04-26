@@ -28,8 +28,8 @@ export default {
   methods: {
     toggleDisplay(rocketId) {
       this.isDisplayed = !this.isDisplayed;
-      console.log(this.isDisplayed);
       this.displayedRocketId = rocketId;
+      console.log(this.isDisplayed);
       console.log(rocketId);
     },
     logout() {

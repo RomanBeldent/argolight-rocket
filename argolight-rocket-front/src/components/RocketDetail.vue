@@ -108,26 +108,28 @@ section {
 .description-container {
   display: flex;
   align-items: center;
+  height: 75%;
   gap: 5%;
-  padding: 5%;
+  padding: 0 5% 5% 5%;
 }
 
 img {
   max-width: 32vw;
   width: auto;
   border-radius: 0 15px 15px 0px;
-}
-
-.btn-title {
-  display: flex;
-  justify-content: center;
+  object-fit: none;
 }
 
 h3 {
   font-size: 50px;
-  margin-top: 40px;
   display: flex;
   justify-content: center;
   font-weight: 600;
 }
+
+button {  
+  background-color: transparent;
+  font-size: 3rem;
+}
+
 </style>
