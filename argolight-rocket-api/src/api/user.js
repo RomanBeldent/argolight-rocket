@@ -6,27 +6,36 @@ import jwt from 'jsonwebtoken'
 import collection from '../models/userModel.js'
 
 router.post('/signup', async (req, res) => {
-    const message = 'User created successfully'
-    const data = {
-        username: req.body.username,
-        password: req.body.password
-    }
+    const { username, password } = req.body;
 
-    const existingUser = await collection.findOne({ username: data.username })
-    if (existingUser) {
-        return res.status(400).send('User already exists. Please choose a different username.')
-    } else {
-        const hashedPassword = await bcrypt.hash(data.password, 10)
-        data.password = hashedPassword
-        const userdata = await collection.insertMany(data)
-        console.log(userdata)
-        res.status(201).json(success(message, data))
+    try {
+        if (!username || !password) {
+            return res.status(400).json({ error: 'Username and password are required' });
+        }
+        const existingUser = await UserModel.findOne({ username });
+        if (existingUser) {
+            return res.status(400).json({ error: 'User already exists. Please choose a different username.' });
+        }
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = new UserModel({ username, password: hashedPassword });
+        await newUser.validate();
+
+        await newUser.save();
+
+        const message = 'User created successfully';
+        res.status(201).json({ message, data: { username: newUser.username } });
+    } catch (error) {
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({ error: error.message });
+        }
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
     }
-})
+});
 
 router.post('/signin', async (req, res) => {
     try {
-        const user = await collection.findOne({ username: req.body.username })
+        const user = await UserModel.findOne({ username: req.body.username })
         if (!user) {
             return res.status(400).send('Username not found')
         }

@@ -50,6 +50,22 @@ router.post('/rockets', validateToken, async (req, res) => {
     const rocket = req.body
     const message = `The rocket ${req.body.name} has been added`
 
+    const validateRocket = (rocket) => {
+        const requiredFields = ['name', 'height', 'active', 'description', 'country', 'pictureUrl']
+
+        for (const field of requiredFields) {
+           // Ne fonctionne pas avec (!rocket[field]) car false est considéré comme falsy, il considérera donc le champ active comme manquant
+            if (rocket[field] === undefined || rocket[field === null]) {
+                return `Field '${field}' is required`;
+            }
+        }
+    }
+
+    const validationError = validateRocket(rocket);
+    if (validationError) {
+        return res.status(400).json({ error: validationError });
+    }
+
     db.collection('rockets')
         .insertOne(rocket)
         .then(rocket => {
