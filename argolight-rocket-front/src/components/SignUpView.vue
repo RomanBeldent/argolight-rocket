@@ -15,6 +15,7 @@
         </div>
       </form>
     </div>
+    <router-link to="/">Retour</router-link>
   </template>
   
   <script>
@@ -62,5 +63,4 @@
   </script>
   
   <style scoped>
-  /* Styles spécifiques à ce composant */
   </style>

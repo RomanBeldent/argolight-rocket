@@ -15,22 +15,17 @@ const routes = [
     path: '/rockets',
     name: 'Rockets',
     component: () => import('../components/RocketsView.vue')
-  }
+  },
+  {
+    path: '/rockets/:id',
+    name: 'RocketDetail',
+    component: () => import('../components/RocketDetail.vue')
+  },
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes: routes
 })
-
-router.beforeEach((to, from, next) => {
-  const isAuthenticated = localStorage.getItem('token');
-
-  if (to.meta.requiresAuth && !isAuthenticated) {
-    next({ name: 'Login' });
-  } else {
-    next();
-  }
-});
 
 export default router;

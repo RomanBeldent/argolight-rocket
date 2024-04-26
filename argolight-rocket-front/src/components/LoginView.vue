@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="login">
     <input v-model="username" placeholder="Nom d'utilisateur" />
     <input v-model="password" type="password" placeholder="Mot de passe" />
-    <button @click="handleLogin">Se connecter</button>
+    <button class="btn" @click="handleLogin">Se connecter</button>
     <router-link to="/signup">Se créer un compte</router-link>
   </div>
 </template>
@@ -53,3 +53,16 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+div {
+  height: 30vh;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+</style>
