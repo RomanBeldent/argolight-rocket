@@ -19,9 +19,17 @@
             <div class="value">{{ rocket.country }}</div>
           </div>
           <div class="rocket-data-info">
-            <div class="label">Active</div>
-            <div class="value">{{ rocket.active }}</div>
+            <div class="label">First Flight</div>
+            <div class="value">{{ rocket.firstFlight }}</div>
           </div>
+          <div class="rocket-data-info">
+            <div class="label">Status</div>
+            <div class="value">
+              <span v-if="rocket.active" class="green-dot"></span>
+              <span v-else class="red-dot"></span>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -127,9 +135,24 @@ h3 {
   font-weight: 600;
 }
 
-button {  
+button {
   background-color: transparent;
   font-size: 3rem;
 }
 
+.green-dot {
+  width: 10px;
+  height: 10px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.red-dot {
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+}
 </style>
