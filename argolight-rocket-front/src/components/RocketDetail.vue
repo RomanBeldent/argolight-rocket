@@ -1,51 +1,37 @@
 <template>
-  <div v-if="rocket">
-    <h1>{{ rocket.name }}</h1>
-    <img :src="rocket.pictureUrl" alt="Rocket Image">
-    <!-- Autres détails de la fusée -->
-  </div>
-  <div v-else>
-    <p>Fusée non trouvée</p>
-  </div>
-    <router-link to="/rockets">Retour</router-link>
-    </template>
-
-<script>
-import { ref, onMounted } from 'vue';
-
-export default {
-  props: {
-    id: {
-      type: String,
-      required: true
-    }
-  },
-  setup(props) {
-    const rocket = ref(null);
-
-    onMounted(async () => {
+    <h1 v-if="rocket">{{ rocket.name }}</h1>
+  </template>
+  
+  <script>
+  export default {
+    name: "RocketView",
+    props: {
+      rocketId: String
+    },
+    data() {
+      return {
+        rocket: null
+      };
+    },
+    async mounted() {
       try {
+        
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://localhost:3000/rockets/${props.id}`, {  // Utilisation de props.id
+        const response = await fetch(`http://localhost:3000/rockets/${this.rocketId}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
         });
-
+  
         if (!response.ok) {
           throw new Error(`Erreur HTTP: ${response.status}`);
         }
-
+  
         const dataResponse = await response.json();
-        rocket.value = dataResponse.data;
+        this.rocket = dataResponse.data;
       } catch (error) {
-        console.error('Erreur lors de la récupération des détails de la fusée', error);
+        console.error('Erreur lors de la récupération de la fusée', error);
       }
-    });
-
-    return {
-      rocket
-    };
-  }
-};
-</script>
+    }
+  };
+  </script>

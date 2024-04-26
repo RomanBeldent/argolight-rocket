@@ -1,31 +1,40 @@
 <template>
   <div class="rockets-list">
     <div class="rocket-banner" v-for="rocket in rockets" :key="rocket._id">
-      <img :src="rocket.pictureUrl" alt="rocket image" @click="handleRocketClick(rocket._id)">
+      <img @click="toggleDisplay(rocket._id)" :src="rocket.pictureUrl" alt="rocket image">
       <div class="rocket-name">
         {{ rocket.name }}
       </div>
     </div>
+    <RocketDetail :rocketId="this.displayedRocketId" v-if="isDisplayed" />
   </div>
 </template>
 
 <script>
 import { ref, onMounted } from 'vue';
+import RocketDetail from './RocketDetail.vue'
 
 export default {
+  components: {
+    RocketDetail
+  },
+  data() {
+    return {
+      isDisplayed: false,
+      displayedRocketId: null
+    }
+  },
   methods: {
+    toggleDisplay(rocketId) {
+      this.isDisplayed = !this.isDisplayed;
+      console.log(this.isDisplayed);
+      this.displayedRocketId = rocketId;
+      console.log(rocketId);
+    },
     logout() {
       localStorage.removeItem('token');
       this.$router.push({ name: 'Login' });
     },
-    handleRocketClick(rocketId) {
-      const clickedRocket = this.rockets && this.rockets.find(rocket => rocket._id === rocketId);
-      if (clickedRocket) {
-        console.log('Fusée cliquée :', clickedRocket);
-      } else {
-        console.warn(`Fusée avec l'ID ${rocketId} non trouvée`);
-      }
-    }
   },
   setup() {
     const rockets = ref([]);
