@@ -102,7 +102,7 @@ section {
   display: flex;
   flex: 1;
   margin-bottom: 20px;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
   justify-content: space-between;
   border-bottom: 1px solid white;
 }
@@ -141,16 +141,16 @@ button {
 }
 
 .green-dot {
-  width: 10px;
-  height: 10px;
+  width: 13px;
+  height: 13px;
   background-color: green;
   border-radius: 50%;
   display: inline-block;
 }
 
 .red-dot {
-  width: 10px;
-  height: 10px;
+  width: 13px;
+  height: 13px;
   background-color: red;
   border-radius: 50%;
   display: inline-block;
