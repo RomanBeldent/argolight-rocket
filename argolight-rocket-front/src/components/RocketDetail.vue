@@ -1,7 +1,7 @@
 <template>
   <section v-if="rocket" class="overlay" @click.self="toggleDisplay">
-    <div class="test">
-      <div class="rocket-extended">
+    <div class="component-size">
+      <div class="flex">
         <div class="btn-title">
           <button @click="toggleDisplay" class="close-button" type="button">
             <span class="close-button">&times;</span>
@@ -77,12 +77,14 @@ export default {
 </script>
 
 <style scoped>
-.test {
+.component-size {
   display: flex;
   border-radius: 15px;
   margin: 25px 0 50px 0;
-  height: 70vh;
+  height: 65vh;
   width: 70vw;
+  background-color: #504743;
+  border-radius: 15px 0 0 15px;
 }
 
 .overlay {
@@ -97,11 +99,6 @@ export default {
   justify-content: center;
   align-items: center;
   z-index: 999;
-}
-
-.rocket-extended {
-  background-color: #504743;
-  border-radius: 15px 0 0 15px;
 }
 
 .rocket-data {
