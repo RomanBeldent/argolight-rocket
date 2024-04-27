@@ -7,7 +7,7 @@
   <div class="rockets-list">
     <RocketDetail :rocketId="this.displayedRocketId" v-if="isDisplayed" @close="toggleDisplay" />
     <div @click="toggleDisplay(rocket._id)" class="rocket-banner" v-for="rocket in filteredRockets" :key="rocket._id">
-      <img :src="rocket.pictureUrl" alt="rocket image">
+      <img :src="rocket.pictureBannerUrl" alt="rocket image">
       <div class="rocket-name">
         <div class="value">
           <span v-if="rocket.active" class="green dot"></span>

@@ -32,7 +32,7 @@
         </div>
       </div>
     </div>
-    <img :src="rocket.pictureUrl" alt="rocket image larger">
+    <img :src="rocket.pictureDetailUrl" alt="rocket image larger">
   </section>
 </template>
 
