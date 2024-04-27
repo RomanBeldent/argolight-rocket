@@ -64,6 +64,8 @@ DELETE /rockets/:id
 
 - <a href="https://www.electronjs.org/fr/docs/latest/tutorial/tutorial-first-app">Electron</a> & <a href="https://vuejs.org/guide/introduction.html">Vue</a> websites documentation to get a better understanding on how Electron/vue3 works and how to work with it
 
+- <a href="https://tsmx.net/convert-existing-nodejs-project-from-commonjs-to-esm/">Convert an existing NodeJS project from CommonJS to ESM / ECMAScript</a>
+
 ### Credits
 Thanks to these fellows for their contents that helped me through this whole process 🙏
 
