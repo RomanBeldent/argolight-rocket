@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <spring-spinner :animation-duration="3000" :size="60" color="#ff1d5e" />
     <div class="user-auth">
       <div class="user-info">
         <p>Roman</p>
@@ -14,8 +13,6 @@
 
 <script>
 
-import { SpringSpinner } from 'epic-spinners'
-
 export default {
   methods: {
     logout() {
@@ -25,7 +22,6 @@ export default {
   },
   name: 'App',
   components: {
-    SpringSpinner
   }
 }
 </script>

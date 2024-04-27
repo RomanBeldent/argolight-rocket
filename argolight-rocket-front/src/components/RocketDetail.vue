@@ -39,6 +39,7 @@
 </template>
 
 <script>
+
 export default {
   name: "RocketView",
   props: {
@@ -84,7 +85,6 @@ export default {
   height: 65vh;
   width: 70vw;
   background-color: #504743;
-  border-radius: 15px 0 0 15px;
 }
 
 .overlay {
