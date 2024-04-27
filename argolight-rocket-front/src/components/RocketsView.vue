@@ -1,9 +1,12 @@
 <template>
-  <select v-model="filter">
-    <option value="all">All</option>
-    <option value="active">Active</option>
-    <option value="inactive">Inactive</option>
-  </select>
+  <div class ="dropdown-menu">
+    <span class="status-text">Rocket Status</span>
+    <select v-model="filter" class="btn filter">
+      <option value="all">All</option>
+      <option value="active">Active</option>
+      <option value="inactive">Inactive</option>
+    </select>
+  </div>
   <div class="rockets-list">
     <RocketDetail :rocketId="this.displayedRocketId" v-if="isDisplayed" @close="toggleDisplay" />
     <div @click="toggleDisplay(rocket._id)" class="rocket-banner" v-for="rocket in filteredRockets" :key="rocket._id">
@@ -174,4 +177,23 @@ img {
 .rocket-banner:hover .chevron-right {
   transform: scale(1.6);
 }
+
+.filter {
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  width: 7%;
+} 
+
+.dropdown-menu {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.status-text {
+  padding-right: 20px;
+}
+
 </style>

@@ -21,7 +21,7 @@
             </div>
             <div class="rocket-data-info">
               <div class="label">First Flight</div>
-              <div class="value">{{ rocket.firstFlight }}</div>
+              <div class="value">{{ rocket.firstLaunch }}</div>
             </div>
             <div class="rocket-data-info">
               <div class="label">Status</div>

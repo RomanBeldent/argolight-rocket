@@ -38,10 +38,10 @@ export default {
 }
 
 .user-auth {
-  width: 100%;
+  width: 135%;
   display: flex;
   justify-content: flex-end;
-  margin: 25px 100px 0 0;
+  margin-top: 25px;
 }
 
 .user-info {
