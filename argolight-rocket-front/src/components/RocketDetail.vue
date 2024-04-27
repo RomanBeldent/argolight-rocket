@@ -124,7 +124,7 @@ img {
   max-width: 32vw;
   width: auto;
   border-radius: 0 15px 15px 0px;
-  object-fit: none;
+  object-fit: cover;
 }
 
 h3 {
