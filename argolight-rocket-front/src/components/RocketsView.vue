@@ -1,5 +1,11 @@
 <template>
-  <div class ="dropdown-menu">
+  <div class="user-auth">
+    <div class="user-info">
+      <p>Roman</p>
+      <button @click="logout" class="btn logout">Se déconnecter</button>
+    </div>
+  </div>
+  <div class="dropdown-menu">
     <span class="status-text">Rocket Status</span>
     <select v-model="filter" class="btn filter">
       <option value="all">All</option>
@@ -103,12 +109,26 @@ export default {
 </script>
 
 <style scoped>
+.user-auth {
+  position: absolute;
+  margin: 20px 30px 0 0;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
 .rockets-list {
   width: 70vw;
   display: flex;
   align-items: center;
   flex-direction: column;
-  z-index: 1; /* S'assurer que c'est en dessous de RocketDetail */
+  z-index: 1;
+  /* S'assurer que c'est en dessous de RocketDetail */
 }
 
 .rocket-banner {
@@ -183,7 +203,7 @@ img {
   border: none;
   cursor: pointer;
   width: 7%;
-} 
+}
 
 .dropdown-menu {
   width: 100%;
@@ -195,5 +215,4 @@ img {
 .status-text {
   padding-right: 20px;
 }
-
 </style>
