@@ -105,6 +105,7 @@ export default {
   display: flex;
   align-items: center;
   flex-direction: column;
+  z-index: 1; /* S'assurer que c'est en dessous de RocketDetail */
 }
 
 .rocket-banner {
@@ -115,6 +116,7 @@ export default {
   cursor: pointer;
   margin: 25px;
   border-radius: 10px;
+  z-index: 2;
 }
 
 .rocket-name {

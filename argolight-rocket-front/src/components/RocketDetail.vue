@@ -1,38 +1,40 @@
 <template>
-  <section v-if="rocket">
-    <div class="rocket-extended">
-      <div class="btn-title">
-        <button @click="toggleDisplay" class="close-button" type="button">
-          <span class="close-button">&times;</span>
-        </button>
-        <h3>{{ rocket.name }}</h3>
-      </div>
-      <div class="description-container">
-        <p class="description">{{ rocket.description }}</p>
-        <div class="rocket-data">
-          <div class="rocket-data-info">
-            <div class="label">Height</div>
-            <div class="value">{{ rocket.height }}m</div>
-          </div>
-          <div class="rocket-data-info">
-            <div class="label">Country</div>
-            <div class="value">{{ rocket.country }}</div>
-          </div>
-          <div class="rocket-data-info">
-            <div class="label">First Flight</div>
-            <div class="value">{{ rocket.firstFlight }}</div>
-          </div>
-          <div class="rocket-data-info">
-            <div class="label">Status</div>
-            <div class="value">
-              <span v-if="rocket.active" class="green-dot"></span>
-              <span v-else class="red-dot"></span>
+  <section v-if="rocket" class="overlay" @click.self="toggleDisplay">
+    <div class="test">
+      <div class="rocket-extended">
+        <div class="btn-title">
+          <button @click="toggleDisplay" class="close-button" type="button">
+            <span class="close-button">&times;</span>
+          </button>
+          <h3>{{ rocket.name }}</h3>
+        </div>
+        <div class="description-container">
+          <p class="description">{{ rocket.description }}</p>
+          <div class="rocket-data">
+            <div class="rocket-data-info">
+              <div class="label">Height</div>
+              <div class="value">{{ rocket.height }}m</div>
+            </div>
+            <div class="rocket-data-info">
+              <div class="label">Country</div>
+              <div class="value">{{ rocket.country }}</div>
+            </div>
+            <div class="rocket-data-info">
+              <div class="label">First Flight</div>
+              <div class="value">{{ rocket.firstFlight }}</div>
+            </div>
+            <div class="rocket-data-info">
+              <div class="label">Status</div>
+              <div class="value">
+                <span v-if="rocket.active" class="green-dot"></span>
+                <span v-else class="red-dot"></span>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <img :src="rocket.pictureDetailUrl" alt="rocket image larger">
     </div>
-    <img :src="rocket.pictureDetailUrl" alt="rocket image larger">
   </section>
 </template>
 
@@ -75,19 +77,31 @@ export default {
 </script>
 
 <style scoped>
-section {
-  border-radius: 15px;
+.test {
   display: flex;
+  border-radius: 15px;
   margin: 25px 0 50px 0;
-  height: 650px;
+  height: 70vh;
+  width: 70vw;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
 
 .rocket-extended {
   background-color: #504743;
-  border-radius: 10px 0 0 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  border-radius: 15px 0 0 15px;
 }
 
 .rocket-data {
