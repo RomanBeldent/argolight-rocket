@@ -3,26 +3,26 @@ const router = express.Router()
 import { getDb } from '../db/db.js';
 import success from '../helper/success.js'
 import { ObjectId } from 'mongodb'
-import validateToken from '../middleware/validateToken.js'
+import authenticateToken from '../middleware/authenticateToken.js';
 
-router.get('/rockets', validateToken, async (req, res) => {
-    let db = await getDb()
-    let rockets = []
+router.get('/rockets', authenticateToken, async (req, res) => {
+    let db = await getDb();
+    let rockets = [];
 
     db.collection('rockets')
         .find()
         // .sort()
         .forEach(rocket => rockets.push(rocket))
         .then(() => {
-            const message = `There are currently ${rockets.length} rockets in the list`
-            res.status(200).json(success(message, rockets))
+            const message = `There are currently ${rockets.length} rockets in the list`;
+            res.status(200).json(success(message, rockets));
         })
         .catch((err) => {
             res.status(500).json({ error: 'Could not fetch the rockets', message: err })
-        })
+        });
 })
 
-router.get('/rockets/:id', validateToken, async (req, res) => {
+router.get('/rockets/:id', authenticateToken, async (req, res) => {
     let db = await getDb()
     const message = 'A rocket has been found'
 
@@ -45,13 +45,13 @@ router.get('/rockets/:id', validateToken, async (req, res) => {
     }
 })
 
-router.post('/rockets', validateToken, async (req, res) => {
+router.post('/rockets', authenticateToken, async (req, res) => {
     let db = await getDb()
     const rocket = req.body
     const message = `The rocket ${req.body.name} has been added`
 
     const validateRocket = (rocket) => {
-        const requiredFields = ['name', 'height', 'active', 'description', 'country', 'pictureUrl']
+        const requiredFields = ['name', 'height', 'active', 'description', 'country', 'pictureBannerUrl', 'pictureDetailUrl']
 
         for (const field of requiredFields) {
            // Ne fonctionne pas avec (!rocket[field]) car false est considéré comme falsy, il considérera donc le champ active comme manquant
@@ -76,7 +76,7 @@ router.post('/rockets', validateToken, async (req, res) => {
         })
 })
 
-router.delete('/rockets/:id', validateToken, async (req, res) => {
+router.delete('/rockets/:id', authenticateToken, async (req, res) => {
     let db = await getDb()
     const message = `The rocket has been properly deleted`
 
@@ -94,7 +94,7 @@ router.delete('/rockets/:id', validateToken, async (req, res) => {
     }
 })
 
-router.patch('/rockets/:id', validateToken, async (req, res) => {
+router.patch('/rockets/:id', authenticateToken, async (req, res) => {
     let db = await getDb()
     const updates = req.body
     const message = `The rocket has been properly updated`

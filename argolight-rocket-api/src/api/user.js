@@ -3,6 +3,25 @@ const router = express.Router()
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import UserModel from '../models/userModel.js'
+import authenticateToken from '../middleware/authenticateToken.js'
+
+router.get('/details', authenticateToken, async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const user = await UserModel.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ error: 'Can\'t find user' });
+        }
+
+        res.json({
+            username: user.username
+        });
+    } catch (error) {
+        console.error('Could not fetch user', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
 router.post('/signup', async (req, res) => {
     const { username, password } = req.body;

@@ -1,10 +1,20 @@
 <template>
-  <div class="login">
-    <input v-model="username" placeholder="Nom d'utilisateur" />
-    <input v-model="password" type="password" placeholder="Mot de passe" />
-    <button class="btn" @click="handleLogin">Se connecter</button>
-    <router-link to="/signup">Se créer un compte</router-link>
-  </div>
+  <form class="user-form" @submit.prevent="handleLogin">
+      <p>Bienvenue sur le mini-projet de Roman Beldent pour Argolight.<br> Si vous n'avez pas de compte, veuillez vous
+        en créer un afin de vous connecter à l'application.</p>
+      <div>
+        <label for="username"></label>
+        <input id="username" v-model="username" placeholder="Nom d'utilisateur" required />
+      </div>
+      <div>
+        <label for="password"></label>
+        <input id="password" v-model="password" type="password" placeholder="Mot de passe" required />
+      </div>
+      <div>
+        <button type="submit" class="btn">Se connecter</button>
+      </div>
+      <router-link class="link" to="/signup">Se créer un compte</router-link>
+  </form>
 </template>
 
 <script>
@@ -15,7 +25,6 @@ export default {
   setup() {
     const username = ref('');
     const password = ref('');
-
     const router = useRouter();
 
     const handleLogin = async () => {
@@ -39,7 +48,6 @@ export default {
 
         localStorage.setItem('token', data.token);
         router.push({ name: 'Rockets' });
-        console.log('Successfully connected', data);
       } catch (error) {
         console.error('Connection error', error);
       }
@@ -55,14 +63,4 @@ export default {
 </script>
 
 <style scoped>
-div {
-  height: 30vh;
-}
-
-.login {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
 </style>
