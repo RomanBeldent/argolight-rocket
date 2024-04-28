@@ -15,8 +15,8 @@ Before cloning, ensure you have the following prerequisites met:
 To start the API, head to argoligh-rocket-api folder and use these 3 command lines
 
 ```cmd
+cd argolight-rocket-api
 npm install
-npm update
 npm run start
 ```
 
@@ -55,7 +55,17 @@ DELETE /rockets/:id
 
 ### Front-End
 
-🚧 WIP 🚧
+To run the application with Electron
+
+```cmd
+cd argolight-rocket-front
+npm install
+npm run electron:serve
+```
+
+You only need to create an account in order to connect to the application, if you don't already have one.
+
+Enjoy !
 
 ## Documentation & Credits
 ### Documentation
