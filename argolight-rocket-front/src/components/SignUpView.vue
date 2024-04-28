@@ -10,7 +10,15 @@
       <input id="password" v-model="password" type="password" placeholder="Mot de passe" required />
     </div>
     <div>
-      <button type="submit" class="btn">S'inscrire</button>
+      <label for="confirmPassword"></label>
+      <input id="confirmPassword" v-model="confirmPassword" type="password" placeholder="Confirmez le mot de passe"
+        required />
+    </div>
+    <div>
+      <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
+    </div>
+    <div>
+      <button type="submit" class="btn">Créer</button>
     </div>
     <router-link class="link" to="/">Retour</router-link>
   </form>
@@ -25,8 +33,15 @@ export default {
     const username = ref('');
     const password = ref('');
     const router = useRouter();
+    const confirmPassword = ref('');
+    const errorMessage = ref('');
 
     const handleSignup = async () => {
+      errorMessage.value = '';
+      if (password.value !== confirmPassword.value) {
+        errorMessage.value = 'Les mots de passe ne correspondent pas';
+        return;
+      }
       try {
         const response = await fetch('http://localhost:3000/user/signup', {
           method: 'POST',
@@ -44,9 +59,11 @@ export default {
           console.log('Success !', data);
           router.push({ name: 'Login' });
         } else {
+          errorMessage.value = 'Le nom d\'utilisateur est déjà pris. Veuillez en utiliser un autre.'
           console.error('Error during account creation', data.message);
         }
       } catch (error) {
+        errorMessage.value = 'Erreur lors de la création du compte. Vous pouvez utiliser ( username: roman / password: roman ) en cas de problème de création.';
         console.error('Error during account creation', error);
       }
     };
@@ -54,6 +71,8 @@ export default {
     return {
       username,
       password,
+      confirmPassword,
+      errorMessage,
       handleSignup
     };
   }
