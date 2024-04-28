@@ -1,6 +1,6 @@
 <template>
   <form class="user-form" @submit.prevent="handleLogin">
-      <p>Bienvenue sur le mini-projet de Roman Beldent pour Argolight <br> Si vous n'avez pas de compte, veuillez vous
+      <p>Bienvenue sur le mini-projet de Roman Beldent pour Argolight.<br> Si vous n'avez pas de compte, veuillez vous
         en créer un afin de vous connecter à l'application.</p>
       <div>
         <label for="username"></label>

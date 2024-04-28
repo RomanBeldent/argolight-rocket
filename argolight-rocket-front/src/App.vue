@@ -4,7 +4,6 @@
     <RouterView />
   <span class="footer">Argolight Company © Mini-project by Roman Beldent</span>
   </div>
-  
 </template>
 
 <script>
@@ -26,8 +25,7 @@ export default {
 }
 
 .footer {
-  position: absolute;
-  bottom: 0;
-  margin: 20px 0 30px 0;
+  margin: 50px 0 30px 0;
 }
+
 </style>

@@ -1,18 +1,19 @@
 <template>
-    <form class="user-form" @submit.prevent="handleSignup">
-      <div>
-        <label for="username"></label>
-        <input id="username" v-model="username" type="text" placeholder="Nom d'utilisateur" required />
-      </div>
-      <div>
-        <label for="password"></label>
-        <input id="password" v-model="password" type="password" placeholder="Mot de passe" required />
-      </div>
-      <div>
-        <button type="submit" class="btn">S'inscrire</button>
-      </div>
-      <router-link class="link" to="/">Retour</router-link>
-    </form>
+  <form class="user-form" @submit.prevent="handleSignup">
+    <p>Création d'un nouveau compte</p>
+    <div>
+      <label for="username"></label>
+      <input id="username" v-model="username" type="text" placeholder="Nom d'utilisateur" required />
+    </div>
+    <div>
+      <label for="password"></label>
+      <input id="password" v-model="password" type="password" placeholder="Mot de passe" required />
+    </div>
+    <div>
+      <button type="submit" class="btn">S'inscrire</button>
+    </div>
+    <router-link class="link" to="/">Retour</router-link>
+  </form>
 </template>
 
 <script>
@@ -59,5 +60,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

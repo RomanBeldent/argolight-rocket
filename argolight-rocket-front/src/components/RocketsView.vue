@@ -35,7 +35,6 @@
       </div>
     </div>
   </div>
-  <div class="footer-rocket">Argolight Company © Mini-project by Roman Beldent</div>
 </template>
 
 <script>
@@ -270,6 +269,7 @@ img {
   border: none;
   cursor: pointer;
   width: 10%;
+  outline: none;
 }
 
 .footer-rocket {
