@@ -51,7 +51,7 @@ router.post('/rockets', authenticateToken, async (req, res) => {
     const message = `The rocket ${req.body.name} has been added`
 
     const validateRocket = (rocket) => {
-        const requiredFields = ['name', 'height', 'active', 'description', 'country', 'pictureUrl']
+        const requiredFields = ['name', 'height', 'active', 'description', 'country', 'pictureBannerUrl', 'pictureDetailUrl']
 
         for (const field of requiredFields) {
            // Ne fonctionne pas avec (!rocket[field]) car false est considéré comme falsy, il considérera donc le champ active comme manquant
