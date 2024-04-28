@@ -10,55 +10,18 @@ Before cloning, ensure you have the following prerequisites met:
 - npm package manager installed
 
 ## How to start project 
-### Back-End
-
-To start the API, head to argoligh-rocket-api folder and use these 3 command lines
+### Back
+To start the API, head to argolight-rocket-api folder and use these 2 command lines
 
 ```cmd
-cd argolight-rocket-api
 npm install
 npm run start
 ```
 
-### Routes
-#### User routes
-
-```
-POST /user/signup
-POST /user/signin
-```
-
-In order to test the rockets routes, you first need to get a JWT Token to be authenticated. To do so, use an API testing tool (like ThunderClient or Insomnia), and create yourself a user using `/user/signup` route. 
-
-Then, enter the username & password you just created using `/user/signin` route in JSON format (body section) like so
-
-```json
-{
-  "username": "myUsername",
-  "password": "myPassword"
-}
-```
-
-Once you get the access token in response, use it in Authentication Bearer section to access others routes (the token will expire in 30 minutes, when it does, repeat the sign in process above to get another one).
-
-You can now access the mongodb atlas datababase and test the different routes !
-
-Rockets routes
-```
-GET /rockets
-GET /rockets/:id
-POST /rockets
-PATCH /rockets/:id
-DELETE /rockets/:id
-```
-
-
-### Front-End
-
-To run the application with Electron
+### Front
+To run the application with Electron, head to argolight-rocket-front and use these 2 command lines
 
 ```cmd
-cd argolight-rocket-front
 npm install
 npm run electron:serve
 ```
@@ -67,10 +30,28 @@ You only need to create an account in order to connect to the application, if yo
 
 Enjoy !
 
+### Routes
+#### User routes
+
+```
+GET /user/details
+POST /user/signup
+POST /user/signin
+```
+
+#### Rockets routes
+```
+GET /rockets
+GET /rockets/:id
+POST /rockets
+PATCH /rockets/:id
+DELETE /rockets/:id
+```
+
 ## Documentation & Credits
 ### Documentation
 
-- SpaceX <a href="https://www.spacex.com/">website</a> to fetch datas & pictures
+- SpaceX <a href="https://www.spacex.com/">website</a> to get some datas & wonderful pictures
 
 - <a href="https://www.electronjs.org/fr/docs/latest/tutorial/tutorial-first-app">Electron</a> & <a href="https://vuejs.org/guide/introduction.html">Vue</a> websites documentation to get a better understanding on how Electron/vue3 works and how to work with it
 
