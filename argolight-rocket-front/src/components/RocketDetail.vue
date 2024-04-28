@@ -89,6 +89,7 @@ export default {
   height: 65vh;
   width: 70vw;
   background-color: #504743;
+  box-shadow: 10px 10px 10px rgb(0, 0, 0, 0.6);
 }
 
 .overlay {
@@ -98,7 +99,7 @@ export default {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -154,4 +155,6 @@ h3 {
   font-size: 3rem;
   outline: none;
 }
+
+
 </style>
