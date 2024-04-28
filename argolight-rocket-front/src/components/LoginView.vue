@@ -1,11 +1,20 @@
 <template>
-  <div class="user-form">
-    <p>Bienvenue sur le mini-projet de Roman Beldent pour Argolight <br> Veuillez vous créer un compte afin de vous connecter à l'application !</p>
-    <input v-model="username" placeholder="Nom d'utilisateur" />
-    <input v-model="password" type="password" placeholder="Mot de passe" />
-    <button class="btn" @click="handleLogin">Se connecter</button>
-    <router-link class="link" to="/signup">Se créer un compte</router-link>
-  </div>
+  <form class="user-form" @submit.prevent="handleLogin">
+      <p>Bienvenue sur le mini-projet de Roman Beldent pour Argolight <br> Si vous n'avez pas de compte, veuillez vous
+        en créer un afin de vous connecter à l'application.</p>
+      <div>
+        <label for="username"></label>
+        <input id="username" v-model="username" placeholder="Nom d'utilisateur" required />
+      </div>
+      <div>
+        <label for="password"></label>
+        <input id="password" v-model="password" type="password" placeholder="Mot de passe" required />
+      </div>
+      <div>
+        <button type="submit" class="btn">Se connecter</button>
+      </div>
+      <router-link class="link" to="/signup">Se créer un compte</router-link>
+  </form>
 </template>
 
 <script>

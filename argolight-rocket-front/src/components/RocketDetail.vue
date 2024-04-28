@@ -57,6 +57,7 @@ export default {
   },
   async mounted() {
     try {
+      document.body.style.overflow = 'hidden';
       const token = localStorage.getItem('token');
       const response = await fetch(`http://localhost:3000/rockets/${this.rocketId}`, {
         headers: {
@@ -73,7 +74,10 @@ export default {
     } catch (error) {
       console.error('Erreur lors de la récupération de la fusée', error);
     }
-  }
+  },
+  beforeUnmount() {
+    document.body.style.overflow = 'auto';
+  },
 };
 </script>
 
@@ -94,7 +98,7 @@ export default {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
   align-items: center;
