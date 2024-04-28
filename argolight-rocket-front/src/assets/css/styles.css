@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Rebelton';
+  src: local('Rebelton Bold'), local('Rebelton-Bold'),
+      url('../fonts/RebeltonBold/REBELTON-Medium.woff2') format('woff2'),
+      url('../fonts/RebeltonBold/REBELTON-Medium.woff') format('woff'),
+      url('../fonts/RebeltonBold/REBELTON-Medium.ttf') format('truetype');
+}
+
 body {
   background: rgb(2, 5, 23);
   background: linear-gradient(90deg, rgba(2, 5, 23, 1) 10%, rgba(28, 33, 69, 1) 50%, rgba(7, 10, 38, 1) 100%);
@@ -13,6 +21,7 @@ body::-webkit-scrollbar {
 h1 {
   font-size: 5em;
   padding: 125px 0 100px 0;
+  font-family: 'Rebelton', sans-serif;
 }
 
 p {

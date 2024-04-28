@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Argolight Rocket Project x SpaceX </h1>
+    <h1>Argolight Rocket</h1>
     <RouterView />
   <span class="footer">Argolight Company © Mini-project by Roman Beldent</span>
   </div>
