@@ -1,7 +1,7 @@
 <template>
   <div class="user-auth">
     <div class="user-info">
-      <p>Roman</p>
+      <p> Bienvenue {{ user.username }}</p>
       <button @click="logout" class="btn logout">Se déconnecter</button>
     </div>
   </div>
@@ -59,9 +59,31 @@ export default {
   },
   setup() {
     const rockets = ref([]);
+    const user = ref({}); 
+
+    const fetchUserDetails = async () => {
+      const token = localStorage.getItem('token');
+
+      try {
+        const response = await fetch('http://localhost:3000/user/details', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error('Erreur lors de la récupération des détails de l\'utilisateur', error);
+      }
+    };
 
     onMounted(async () => {
       try {
+        const userDetails = await fetchUserDetails();
+        user.value = userDetails;
         const token = localStorage.getItem('token');
         const response = await fetch('http://localhost:3000/rockets', {
           headers: {
@@ -102,7 +124,8 @@ export default {
     return {
       rockets,
       filter,
-      filteredRockets
+      filteredRockets,
+      user
     };
   }
 };
