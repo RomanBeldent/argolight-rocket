@@ -1,30 +1,45 @@
 <template>
-  <section v-if="rocket">
-    <div class="rocket-extended">
-      <h3>{{ rocket.name }}</h3>
-      <div class="description-container">
-        <p class="description">{{ rocket.description }}</p>
-        <div class="rocket-data">
-          <div class="rocket-data-info">
-            <div class="label">Height</div>
-            <div class="value">{{ rocket.height }}</div>
-          </div>
-          <div class="rocket-data-info">
-            <div class="label">Country</div>
-            <div class="value">{{ rocket.country }}</div>
-          </div>
-          <div class="rocket-data-info">
-            <div class="label">Active</div>
-            <div class="value">{{ rocket.active }}</div>
+  <section v-if="rocket" class="overlay" @click.self="toggleDisplay">
+    <div class="component-size">
+      <div class="flex">
+        <div class="btn-title">
+          <button @click="toggleDisplay" class="close-button" type="button">
+            <span class="close-button">&times;</span>
+          </button>
+          <h3>{{ rocket.name }}</h3>
+        </div>
+        <div class="description-container">
+          <p class="description">{{ rocket.description }}</p>
+          <div class="rocket-data">
+            <div class="rocket-data-info">
+              <div class="label">Height</div>
+              <div class="value">{{ rocket.height }}m</div>
+            </div>
+            <div class="rocket-data-info">
+              <div class="label">Country</div>
+              <div class="value">{{ rocket.country }}</div>
+            </div>
+            <div class="rocket-data-info">
+              <div class="label">First Flight</div>
+              <div class="value">{{ rocket.firstLaunch }}</div>
+            </div>
+            <div class="rocket-data-info">
+              <div class="label">Status</div>
+              <div class="value">
+                <span v-if="rocket.active" class="green-dot"></span>
+                <span v-else class="red-dot"></span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      <img :src="rocket.pictureDetailUrl" alt="rocket image larger">
     </div>
-    <img :src="rocket.pictureUrl" alt="rocket image larger">
   </section>
 </template>
 
 <script>
+
 export default {
   name: "RocketView",
   props: {
@@ -34,6 +49,11 @@ export default {
     return {
       rocket: null
     };
+  },
+  methods: {
+    toggleDisplay() {
+      this.$emit('close')
+    }
   },
   async mounted() {
     try {
@@ -58,19 +78,27 @@ export default {
 </script>
 
 <style scoped>
-section {
-  border-radius: 15px;
+.component-size {
   display: flex;
+  border-radius: 15px;
   margin: 25px 0 50px 0;
-  height: 650px;
+  height: 65vh;
+  width: 70vw;
+  background-color: #504743;
 }
 
-.rocket-extended {
-  background-color: #504743;
-  border-radius: 10px 0 0 10px;
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
 
 .rocket-data {
@@ -84,7 +112,7 @@ section {
   display: flex;
   flex: 1;
   margin-bottom: 20px;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
   justify-content: space-between;
   border-bottom: 1px solid white;
 }
@@ -98,21 +126,44 @@ section {
 .description-container {
   display: flex;
   align-items: center;
+  height: 75%;
   gap: 5%;
-  padding: 5%;
+  padding: 0 5% 5% 5%;
 }
 
 img {
   max-width: 32vw;
   width: auto;
   border-radius: 0 15px 15px 0px;
+  object-fit: cover;
 }
 
 h3 {
   font-size: 50px;
-  margin-top: 40px;
   display: flex;
   justify-content: center;
   font-weight: 600;
+}
+
+.close-button {
+  background-color: transparent;
+  font-size: 3rem;
+  outline: none;
+}
+
+.green-dot {
+  width: 13px;
+  height: 13px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.red-dot {
+  width: 13px;
+  height: 13px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
 }
 </style>

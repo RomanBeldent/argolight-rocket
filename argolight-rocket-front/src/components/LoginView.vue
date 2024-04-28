@@ -15,7 +15,6 @@ export default {
   setup() {
     const username = ref('');
     const password = ref('');
-
     const router = useRouter();
 
     const handleLogin = async () => {
@@ -39,7 +38,6 @@ export default {
 
         localStorage.setItem('token', data.token);
         router.push({ name: 'Rockets' });
-        console.log('Successfully connected', data);
       } catch (error) {
         console.error('Connection error', error);
       }
