@@ -14,7 +14,7 @@
         <div class="dot"></div> Inactive
       </span>
     </div>
-    <span class="status-text">Rocket Status</span>
+    <span class="status-text">Rocket Filter</span>
     <select v-model="filter" class="btn filter">
       <option value="all">All</option>
       <option value="active">Active</option>
@@ -171,7 +171,7 @@ export default {
   height: 250px;
   overflow: hidden;
   cursor: pointer;
-  margin: 25px;
+  margin-bottom: 20px;
   border-radius: 10px;
   z-index: 2;
 }
@@ -198,10 +198,6 @@ img {
   object-fit: cover;
 }
 
-.footer {
-  margin: 20px 0 30px 0;
-}
-
 .dot-info {
   width: 100%;
   display: flex;
@@ -214,20 +210,20 @@ img {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  padding-bottom: 35px;
 }
 
 .status-text {
   width: 10%;
-  padding-right: 20px;
 }
 
 .active.green-dot {
-  display: inline-flex;
+  display: flex;
   align-items: center;
 }
 
 .inactive.red-dot {
-  display: inline-flex;
+  display: flex;
   align-items: center;
 }
 
@@ -275,4 +271,9 @@ img {
   cursor: pointer;
   width: 10%;
 }
+
+.footer {
+  margin: 20px 0 30px 0;
+}
+
 </style>
