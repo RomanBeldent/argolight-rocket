@@ -150,20 +150,4 @@ h3 {
   font-size: 3rem;
   outline: none;
 }
-
-.green-dot {
-  width: 13px;
-  height: 13px;
-  background-color: green;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.red-dot {
-  width: 13px;
-  height: 13px;
-  background-color: red;
-  border-radius: 50%;
-  display: inline-block;
-}
 </style>

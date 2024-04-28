@@ -5,7 +5,15 @@
       <button @click="logout" class="btn logout">Se déconnecter</button>
     </div>
   </div>
-  <div class="dropdown-menu">
+  <div class="dropdown-section">
+    <div class="dot-info">
+      <span class="active green-dot">
+        <div class="dot"></div> Active
+      </span>
+      <span class="inactive red-dot">
+        <div class="dot"></div> Inactive
+      </span>
+    </div>
     <span class="status-text">Rocket Status</span>
     <select v-model="filter" class="btn filter">
       <option value="all">All</option>
@@ -59,7 +67,7 @@ export default {
   },
   setup() {
     const rockets = ref([]);
-    const user = ref({}); 
+    const user = ref({});
 
     const fetchUserDetails = async () => {
       const token = localStorage.getItem('token');
@@ -101,7 +109,7 @@ export default {
         if (filter.value === 'all') {
           filteredRockets.value = rockets.value;
         } else {
-          // Filtrage initial des fusées en fonction du filtre actif/inactif sinon
+          // Filtrage initial des fusées en fonction du filtre actif/inactif sinon on ne récupère pas bien le filtre all de base
           filteredRockets.value = rockets.value.filter(rocket => {
             return filter.value === 'active' ? rocket.active : !rocket.active;
           });
@@ -155,7 +163,6 @@ export default {
   align-items: center;
   flex-direction: column;
   z-index: 1;
-  /* S'assurer que c'est en dessous de RocketDetail */
 }
 
 .rocket-banner {
@@ -195,20 +202,57 @@ img {
   margin: 20px 0 30px 0;
 }
 
+.dot-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-section {
+  width: 100%;
+  height: 3vh;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.status-text {
+  width: 10%;
+  padding-right: 20px;
+}
+
+.active.green-dot {
+  display: inline-flex;
+  align-items: center;
+}
+
+.inactive.red-dot {
+  display: inline-flex;
+  align-items: center;
+}
+
 .green.dot {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   background-color: green;
   border-radius: 50%;
   display: inline-block;
 }
 
 .red.dot {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   background-color: red;
   border-radius: 50%;
   display: inline-block;
+}
+
+.active {
+  margin-bottom: 8px;
+}
+
+.inactive {
+  margin-top: 8px;
 }
 
 .dot {
@@ -229,17 +273,6 @@ img {
   padding: 10px;
   border: none;
   cursor: pointer;
-  width: 7%;
-}
-
-.dropdown-menu {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.status-text {
-  padding-right: 20px;
+  width: 10%;
 }
 </style>
