@@ -1,7 +1,7 @@
 <template>
   <div class="user-auth">
     <div class="user-info">
-      <p> Bienvenue {{ user.username }}</p>
+      <span class="user-welcome"> Bienvenue {{ user.username }}</span>
       <button @click="logout" class="btn logout">Se déconnecter</button>
     </div>
   </div>
@@ -143,6 +143,10 @@ export default {
 .user-info {
   display: flex;
   align-items: center;
+}
+
+.user-welcome {
+  margin-right: 30px;
 }
 
 .rockets-list {

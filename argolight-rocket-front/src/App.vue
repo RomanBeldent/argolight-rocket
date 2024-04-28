@@ -22,8 +22,4 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-
-.user-info p {
-  margin-right: 30px;
-}
 </style>
