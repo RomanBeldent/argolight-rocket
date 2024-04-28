@@ -2,7 +2,9 @@
   <div id="app">
     <h1>Argolight Rocket Project x SpaceX </h1>
     <RouterView />
+  <span class="footer">Argolight Company © Mini-project by Roman Beldent</span>
   </div>
+  
 </template>
 
 <script>
@@ -21,5 +23,11 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  margin: 20px 0 30px 0;
 }
 </style>

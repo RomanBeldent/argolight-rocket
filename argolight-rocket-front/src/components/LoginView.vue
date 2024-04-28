@@ -1,5 +1,6 @@
 <template>
   <div class="user-form">
+    <p>Bienvenue sur le mini-projet de Roman Beldent pour Argolight <br> Veuillez vous créer un compte afin de vous connecter à l'application !</p>
     <input v-model="username" placeholder="Nom d'utilisateur" />
     <input v-model="password" type="password" placeholder="Mot de passe" />
     <button class="btn" @click="handleLogin">Se connecter</button>
