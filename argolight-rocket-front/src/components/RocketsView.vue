@@ -120,7 +120,7 @@ export default {
       } catch (error) {
         console.error('Erreur lors de la récupération des fusées', error);
       } finally {
-        isLoading.value = false; // Toujours arrêter le chargement
+        isLoading.value = false; 
       }
     });
 
