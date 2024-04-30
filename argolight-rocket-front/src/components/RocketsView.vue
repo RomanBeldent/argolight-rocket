@@ -1,37 +1,42 @@
 <template>
-  <div class="user-auth">
-    <div class="user-info">
-      <span class="user-welcome"> Bienvenue {{ user.username }}</span>
-      <button @click="logout" class="btn logout">Se déconnecter</button>
-    </div>
+  <div class="loader-wrapper" v-if="isLoading">
+    <orbit-spinner :animation-duration="1200" :size="55" color="#ff1d5e" />
   </div>
-  <div class="dropdown-section">
-    <div class="dot-info">
-      <span class="active green-dot">
-        <div class="dot"></div> Active
-      </span>
-      <span class="inactive red-dot">
-        <div class="dot"></div> Inactive
-      </span>
+  <div v-else>
+    <div class="user-auth">
+      <div class="user-info">
+        <span class="user-welcome"> Bienvenue {{ user.username }}</span>
+        <button @click="logout" class="btn logout">Se déconnecter</button>
+      </div>
     </div>
-    <span class="status-text">Rocket Filter</span>
-    <select v-model="filter" class="btn filter">
-      <option value="all">All</option>
-      <option value="active">Active</option>
-      <option value="inactive">Inactive</option>
-    </select>
-  </div>
-  <div class="rockets-list">
-    <RocketDetail :rocketId="this.displayedRocketId" v-if="isDisplayed" @close="toggleDisplay" />
-    <div @click="toggleDisplay(rocket._id)" class="rocket-banner" v-for="rocket in filteredRockets" :key="rocket._id">
-      <img :src="rocket.pictureBannerUrl" alt="rocket image">
-      <div class="rocket-name">
-        <div class="value">
-          <span v-if="rocket.active" class="green dot"></span>
-          <span v-else class="red dot"></span>
+    <div class="dropdown-section">
+      <div class="dot-info">
+        <span class="active green-dot">
+          <div class="dot"></div> Active
+        </span>
+        <span class="inactive red-dot">
+          <div class="dot"></div> Inactive
+        </span>
+      </div>
+      <span class="status-text">Rocket Filter</span>
+      <select v-model="filter" class="btn filter">
+        <option value="all">All</option>
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+      </select>
+    </div>
+    <div class="rockets-list">
+      <RocketDetail :rocketId="this.displayedRocketId" v-if="isDisplayed" @close="toggleDisplay" />
+      <div @click="toggleDisplay(rocket._id)" class="rocket-banner" v-for="rocket in filteredRockets" :key="rocket._id">
+        <img :src="rocket.pictureBannerUrl" alt="rocket image">
+        <div class="rocket-name">
+          <div class="value">
+            <span v-if="rocket.active" class="green dot"></span>
+            <span v-else class="red dot"></span>
+          </div>
+          {{ rocket.name }}
+          <span class="chevron-right">&#x3009;</span>
         </div>
-        {{ rocket.name }}
-        <span class="chevron-right">&#x3009;</span>
       </div>
     </div>
   </div>
@@ -39,20 +44,13 @@
 
 <script>
 import { ref, onMounted, watch } from 'vue';
-import RocketDetail from './RocketDetail.vue'
-
-const filter = ref('all');
-const filteredRockets = ref([]);
+import RocketDetail from './RocketDetail.vue';
+import { OrbitSpinner } from 'epic-spinners';
 
 export default {
   components: {
-    RocketDetail
-  },
-  data() {
-    return {
-      isDisplayed: false,
-      displayedRocketId: null,
-    }
+    RocketDetail,
+    OrbitSpinner,
   },
   methods: {
     toggleDisplay(rocketId) {
@@ -65,8 +63,13 @@ export default {
     },
   },
   setup() {
+    const isDisplayed = ref(false);
+    const displayedRocketId = ref(null);
     const rockets = ref([]);
     const user = ref({});
+    const isLoading = ref(true);
+    const filter = ref('all');
+    const filteredRockets = ref([]);
 
     const fetchUserDetails = async () => {
       const token = localStorage.getItem('token');
@@ -89,6 +92,7 @@ export default {
 
     onMounted(async () => {
       try {
+        isLoading.value = true;
         const userDetails = await fetchUserDetails();
         user.value = userDetails;
         const token = localStorage.getItem('token');
@@ -115,6 +119,8 @@ export default {
         }
       } catch (error) {
         console.error('Erreur lors de la récupération des fusées', error);
+      } finally {
+        isLoading.value = false; 
       }
     });
 
@@ -129,10 +135,13 @@ export default {
     });
 
     return {
+      isDisplayed,
+      displayedRocketId,
       rockets,
       filter,
       filteredRockets,
-      user
+      user,
+      isLoading
     };
   }
 };
@@ -144,7 +153,9 @@ export default {
   margin: 20px 30px 0 0;
   display: flex;
   justify-content: flex-end;
-  width: 100%;
+  width: 83%;
+  top: 0;
+  right: 0;
 }
 
 .user-info {
@@ -275,5 +286,4 @@ img {
 .footer-rocket {
   margin: 20px 0 30px 0;
 }
-
 </style>
