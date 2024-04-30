@@ -47,19 +47,10 @@ import { ref, onMounted, watch } from 'vue';
 import RocketDetail from './RocketDetail.vue';
 import { OrbitSpinner } from 'epic-spinners';
 
-const filter = ref('all');
-const filteredRockets = ref([]);
-
 export default {
   components: {
     RocketDetail,
     OrbitSpinner,
-  },
-  data() {
-    return {
-      isDisplayed: false,
-      displayedRocketId: null,
-    }
   },
   methods: {
     toggleDisplay(rocketId) {
@@ -72,9 +63,13 @@ export default {
     },
   },
   setup() {
+    const isDisplayed = ref(false);
+    const displayedRocketId = ref(null);
     const rockets = ref([]);
     const user = ref({});
     const isLoading = ref(true);
+    const filter = ref('all');
+    const filteredRockets = ref([]);
 
     const fetchUserDetails = async () => {
       const token = localStorage.getItem('token');
@@ -96,10 +91,8 @@ export default {
     };
 
     onMounted(async () => {
-      setTimeout(() => {
-        isLoading.value = false // Arrête le loader après 2 secondes
-      }, 2000)
       try {
+        isLoading.value = true;
         const userDetails = await fetchUserDetails();
         user.value = userDetails;
         const token = localStorage.getItem('token');
@@ -126,6 +119,8 @@ export default {
         }
       } catch (error) {
         console.error('Erreur lors de la récupération des fusées', error);
+      } finally {
+        isLoading.value = false; // Toujours arrêter le chargement
       }
     });
 
@@ -140,6 +135,8 @@ export default {
     });
 
     return {
+      isDisplayed,
+      displayedRocketId,
       rockets,
       filter,
       filteredRockets,
@@ -288,12 +285,5 @@ img {
 
 .footer-rocket {
   margin: 20px 0 30px 0;
-}
-
-.loader-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50vh;
 }
 </style>

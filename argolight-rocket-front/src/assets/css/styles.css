@@ -90,3 +90,10 @@ input {
   border-radius: 50%;
   display: inline-block;
 }
+
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
